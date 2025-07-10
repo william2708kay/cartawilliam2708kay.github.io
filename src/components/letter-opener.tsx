@@ -134,13 +134,10 @@ export function LetterOpener({
   useEffect(() => {
     if (step === 'playingVideo' && videoRef.current) {
       const video = videoRef.current;
-      const playPromise = video.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(error => {
-          console.error("Error al intentar reproducir el video:", error);
-          setStep('specialMessage');
-        });
-      }
+      video.play().catch(error => {
+        console.error("Error al intentar reproducir el video:", error);
+        setStep('specialMessage');
+      });
     }
   }, [step]);
 
@@ -224,7 +221,7 @@ export function LetterOpener({
     return (
       <div 
         className="flex items-center justify-center min-h-screen bg-cover bg-center"
-        style={{ backgroundImage: "url('/para-la-carta.jpg')" }}
+        style={{ backgroundImage: "url('/para-la-carta.jpeg')" }}
         data-ai-hint="romantic letter background"
       >
         <Fireworks />
@@ -237,7 +234,7 @@ export function LetterOpener({
           <div className="mt-6 text-xl md:text-2xl text-white/90 animate-fade-in-up space-y-4" style={{ animationDelay: "0.5s" }}>
             <p>Sé que ya no estoy ahí para ti, pero que este día esté lleno de alegría y amor.</p>
             <p>Te quiero mucho y te extraño.</p>
-            <p>Espero que tus metas se cumplan y éxitos en todo, señorita.</p>
+            <p>Espero que tus metas se cumplan y éxitos en todo, señorita. Créeme que siempre te tendré en mi mente como un lindo recuerdo.</p>
             <p className="mt-8 font-bold">- Con mucho amor, William</p>
           </div>
         </div>
