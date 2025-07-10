@@ -69,24 +69,6 @@ export function LetterOpener({
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    if (step === 'playingVideo' && videoRef.current) {
-      const video = videoRef.current;
-      let isCancelled = false;
-
-      video.play().catch(error => {
-        if (!isCancelled) {
-          console.error("Video play failed:", error);
-          setStep('specialMessage');
-        }
-      });
-      
-      return () => {
-        isCancelled = true;
-      };
-    }
-  }, [step]);
-
-  useEffect(() => {
     if (step === 'showingLetter') {
       const newPetals = Array.from({ length: 30 }).map((_, i) => {
         let icon;
@@ -177,6 +159,7 @@ export function LetterOpener({
           className="max-w-full max-h-full"
           onEnded={() => setStep('specialMessage')}
           onError={() => setStep('specialMessage')}
+          onLoadedData={(e) => e.currentTarget.play().catch(() => setStep('specialMessage'))}
           muted
           playsInline
         >
