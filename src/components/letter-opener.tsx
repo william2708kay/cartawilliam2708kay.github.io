@@ -10,6 +10,7 @@ import { RoseIcon } from "@/components/icons/rose-icon";
 import { useToast } from "@/hooks/use-toast";
 import { Heart } from "lucide-react";
 import { Fireworks } from "./fireworks";
+import Image from "next/image";
 
 const Petal = ({
   style,
@@ -159,11 +160,12 @@ export function LetterOpener({
           <LilyIcon className="absolute -top-16 -left-24 h-32 w-32 text-primary/30 opacity-20 -rotate-45 animate-pulse-slow" />
           <RoseIcon className="absolute -bottom-16 -right-24 h-32 w-32 text-accent/30 opacity-20 rotate-45 animate-pulse-slow" />
           <div className="mb-8 w-[200px] h-[200px] flex items-center justify-center">
-             <img 
+             <Image 
               src="/principal.gif"
               alt="principal" 
               width={200} 
               height={200}
+              unoptimized
             />
           </div>
           <h1
