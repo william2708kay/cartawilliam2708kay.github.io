@@ -4,9 +4,7 @@
 import { useState, useEffect, useMemo, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { LilyIcon } from "@/components/icons/lily-icon";
-import { TulipIcon } from "@/components/icons/tulip-icon";
-import { RoseIcon } from "@/components/icons/rose-icon";
+import { LilyIcon, TulipIcon, RoseIcon } from "@/components/icons";
 import { useToast } from "@/hooks/use-toast";
 import { Heart } from "lucide-react";
 import { Fireworks } from "./fireworks";
