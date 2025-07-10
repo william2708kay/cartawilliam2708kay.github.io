@@ -2,12 +2,14 @@ import { LetterOpener } from '@/components/letter-opener';
 
 const letterContent = `Mi querida Daiana,
 
-Cada día a tu lado es un regalo, un nuevo pétalo que se añade a la flor de nuestro amor. Pienso en ti y mi mundo se ilumina, como un jardín bañado por el sol de la mañana. Eres la melodía que alegra mis días y la calma que me abraza en la noche.
+Hola, Dais, ¿cómo estás? Estuve preparando esto en mis tiempos libres. Originalmente era para tu cumple, pero supongo que hoy es el final... En fin, ya que trabajo en esto, qué mejor forma de transformar mi trabajo en algo especial para ti.
 
-Los lirios, con su elegancia, me recuerdan tu gracia; los tulipanes, con sus colores vibrantes, tu alegría; y las rosas, con su perfume embriagador, la pasión que despiertas en mí. Eres la flor más bella en el jardín de mi vida, y mi amor por ti crece más fuerte con cada amanecer.
+Gracias por acompañarme hoy a ver Superman. Es mi superhéroe favorito, junto con Spiderman, y aunque todavía no he visto esa, sé que estará genial. Me encanta el cine, pero lo más bonito de ir es tener tu compañía, siempre la disfruto muchísimo.
+
+Cada momento contigo, por simple que sea, se convierte en un recuerdo increíble. Eres esa persona que ilumina todo, y por eso te estoy tan agradecido.
 
 Con todo mi amor,
-Tu admirador secreto.`;
+William`;
 
 export default function Home() {
   return (
