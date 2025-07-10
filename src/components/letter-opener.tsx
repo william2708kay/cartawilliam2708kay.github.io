@@ -9,6 +9,7 @@ import { TulipIcon } from "@/components/icons/tulip-icon";
 import { RoseIcon } from "@/components/icons/rose-icon";
 import { useToast } from "@/hooks/use-toast";
 import { Heart } from "lucide-react";
+import { Fireworks } from "./fireworks";
 
 const Petal = ({
   style,
@@ -32,7 +33,7 @@ const Petal = ({
 
 const AnimatedText = ({ text }: { text: string }) => {
   const [visibleText, setVisibleText] = useState("");
-  const typingSpeed = 80; // milliseconds per character, slowed down
+  const typingSpeed = 80;
 
   useEffect(() => {
     if (text) {
@@ -133,11 +134,13 @@ export function LetterOpener({
   useEffect(() => {
     if (step === 'playingVideo' && videoRef.current) {
       const video = videoRef.current;
-      video.play().catch(error => {
-        console.error("Error al intentar reproducir el video:", error);
-        // If playback fails, move to the next step
-        setStep('specialMessage');
-      });
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          console.error("Error al intentar reproducir el video:", error);
+          setStep('specialMessage');
+        });
+      }
     }
   }, [step]);
 
@@ -219,13 +222,19 @@ export function LetterOpener({
   
   if (step === 'finalSurprise') {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-background">
-        <div className="text-center p-6 md:p-8">
+      <div 
+        className="flex items-center justify-center min-h-screen bg-cover bg-center"
+        style={{ backgroundImage: "url('/para-la-carta.jpg')" }}
+        data-ai-hint="romantic letter background"
+      >
+        <Fireworks />
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="relative text-center p-6 md:p-8 z-10">
           <Heart className="w-24 h-24 text-red-500 mx-auto mb-8 animate-pulse" />
-          <h1 className="text-4xl md:text-6xl font-headline text-foreground animate-fade-in-up">
+          <h1 className="text-4xl md:text-6xl font-headline text-white animate-fade-in-up">
             Feliz Cumpleaños Daiana
           </h1>
-          <div className="mt-6 text-xl md:text-2xl text-foreground/80 animate-fade-in-up space-y-4" style={{ animationDelay: "0.5s" }}>
+          <div className="mt-6 text-xl md:text-2xl text-white/90 animate-fade-in-up space-y-4" style={{ animationDelay: "0.5s" }}>
             <p>Sé que ya no estoy ahí para ti, pero que este día esté lleno de alegría y amor.</p>
             <p>Te quiero mucho y te extraño.</p>
             <p>Espero que tus metas se cumplan y éxitos en todo, señorita.</p>
