@@ -66,6 +66,17 @@ export function LetterOpener({
       icon: JSX.Element;
     }[]
   >([]);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (step === 'playingVideo' && videoRef.current) {
+      videoRef.current.play().catch(error => {
+        console.error("Error al intentar reproducir el video:", error);
+        // Si la reproducción falla, saltamos al siguiente paso
+        handleVideoEnd();
+      });
+    }
+  }, [step]);
 
   useEffect(() => {
     if (step === 'showingLetter') {
@@ -158,10 +169,10 @@ export function LetterOpener({
     return (
       <div className="fixed inset-0 bg-black flex items-center justify-center">
         <video
+          ref={videoRef}
           className="max-w-full max-h-full"
           onEnded={handleVideoEnd}
           onError={handleVideoEnd}
-          autoPlay
           muted
           playsInline
         >
