@@ -13,7 +13,7 @@ import {z} from 'genkit';
 
 const GenerateLoveLetterInputSchema = z.object({
   recipientName: z.string().describe('The name of the recipient.'),
-  floralTheme: z.enum(['lilies', 'tulips']).describe('The floral theme for the letter.'),
+  floralTheme: z.enum(['lilies', 'tulips', 'roses']).describe('The floral theme for the letter.'),
   customOpening: z.string().describe('The custom opening message (e.g., Para Daiana).'),
   tone: z.string().optional().describe('The tone of the love letter (e.g., romantic, passionate). Defaults to romantic.'),
   repeatPhrase: z.string().optional().describe('A phrase the LLM should repeat if it makes sense to do so, to emphasize it.'),

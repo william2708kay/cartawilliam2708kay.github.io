@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { LilyIcon } from "@/components/icons/lily-icon";
 import { TulipIcon } from "@/components/icons/tulip-icon";
+import { RoseIcon } from "@/components/icons/rose-icon";
 
 const Petal = ({
   style,
@@ -46,21 +47,28 @@ export function LetterOpener({
 
   useEffect(() => {
     if (isOpen) {
-      const newPetals = Array.from({ length: 25 }).map((_, i) => ({
-        id: i,
-        style: {
-          left: `${Math.random() * 100}vw`,
-          animationDuration: `${Math.random() * 8 + 7}s`,
-          animationDelay: `${Math.random() * 10}s`,
-          transform: `scale(${Math.random() * 0.5 + 0.6})`,
-        },
-        icon:
-          Math.random() > 0.5 ? (
-            <LilyIcon className="w-6 h-6" />
-          ) : (
-            <TulipIcon className="w-6 h-6" />
-          ),
-      }));
+      const newPetals = Array.from({ length: 30 }).map((_, i) => {
+        let icon;
+        const rand = Math.random();
+        if (rand < 0.33) {
+          icon = <LilyIcon className="w-6 h-6" />;
+        } else if (rand < 0.66) {
+          icon = <TulipIcon className="w-6 h-6" />;
+        } else {
+          icon = <RoseIcon className="w-6 h-6" />;
+        }
+
+        return {
+          id: i,
+          style: {
+            left: `${Math.random() * 100}vw`,
+            animationDuration: `${Math.random() * 8 + 7}s`,
+            animationDelay: `${Math.random() * 10}s`,
+            transform: `scale(${Math.random() * 0.5 + 0.6})`,
+          },
+          icon: icon,
+        };
+      });
       setPetals(newPetals);
     }
   }, [isOpen]);
@@ -79,7 +87,7 @@ export function LetterOpener({
       <div className="flex flex-col items-center justify-center min-h-screen bg-background text-foreground p-4 overflow-hidden">
         <div className="relative text-center">
           <LilyIcon className="absolute -top-16 -left-24 h-32 w-32 text-primary opacity-20 -rotate-45 animate-fade-in" />
-          <TulipIcon className="absolute -bottom-16 -right-24 h-32 w-32 text-accent opacity-20 rotate-45 animate-fade-in" />
+          <RoseIcon className="absolute -bottom-16 -right-24 h-32 w-32 text-accent opacity-20 rotate-45 animate-fade-in" />
           <h1
             className="text-5xl md:text-7xl font-headline mb-8 animate-fade-in-up"
             style={{ animationDelay: "0.2s" }}

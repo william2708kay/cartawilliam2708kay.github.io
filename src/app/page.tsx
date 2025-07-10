@@ -6,7 +6,7 @@ export default async function Home() {
   try {
     const { letter } = await generateLoveLetter({
       recipientName: 'Daiana',
-      floralTheme: 'lilies',
+      floralTheme: 'roses',
       customOpening: 'Para mi querida Daiana,',
       tone: 'apasionado y tierno',
       repeatPhrase: 'eres la flor más bella en el jardín de mi vida',
