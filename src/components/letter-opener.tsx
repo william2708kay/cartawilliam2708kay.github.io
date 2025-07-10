@@ -70,17 +70,8 @@ export function LetterOpener({
   >([]);
   const videoRef = useRef<HTMLVideoElement>(null);
   const { toast } = useToast();
-  const [isFinalButtonEnabled, setIsFinalButtonEnabled] = useState(false);
+  const [isFinalButtonEnabled, setIsFinalButtonEnabled] = useState(true);
 
-  // Date logic inside useEffect to avoid hydration issues
-  useEffect(() => {
-    const targetDate = new Date('2025-07-19T00:00:00');
-    const currentDate = new Date();
-    if (currentDate >= targetDate) {
-      setIsFinalButtonEnabled(true);
-    }
-  }, []);
-  
   const handleFinalButtonClick = () => {
     if (isFinalButtonEnabled) {
       setStep('finalSurprise');
