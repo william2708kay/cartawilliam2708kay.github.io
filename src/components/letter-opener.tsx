@@ -55,7 +55,7 @@ export function LetterOpener({
         } else if (rand < 0.66) {
           icon = <TulipIcon className="w-6 h-6" />;
         } else {
-          icon = <RoseIcon className="w-6 h-6" />;
+          icon = <RoseIcon className="w-6 h-6 text-pink-300" />;
         }
 
         return {
@@ -75,7 +75,7 @@ export function LetterOpener({
 
   const formattedLetter = useMemo(() => {
     return letter.split('\n').map((paragraph, index) => (
-      <p key={index} className="mb-4 last:mb-0">
+      <p key={index} className="mb-6 last:mb-0">
         {paragraph}
       </p>
     ));
@@ -84,12 +84,12 @@ export function LetterOpener({
 
   if (!isOpen) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-background text-foreground p-4 overflow-hidden">
+      <div className="flex flex-col items-center justify-center min-h-screen p-4 overflow-hidden">
         <div className="relative text-center">
-          <LilyIcon className="absolute -top-16 -left-24 h-32 w-32 text-primary opacity-20 -rotate-45 animate-fade-in" />
-          <RoseIcon className="absolute -bottom-16 -right-24 h-32 w-32 text-accent opacity-20 rotate-45 animate-fade-in" />
+          <LilyIcon className="absolute -top-16 -left-24 h-32 w-32 text-primary/30 opacity-20 -rotate-45 animate-fade-in" />
+          <RoseIcon className="absolute -bottom-16 -right-24 h-32 w-32 text-accent/30 opacity-20 rotate-45 animate-fade-in" />
           <h1
-            className="text-5xl md:text-7xl font-headline mb-8 animate-fade-in-up"
+            className="text-6xl md:text-8xl font-headline mb-12 animate-fade-in-up"
             style={{ animationDelay: "0.2s" }}
           >
             {openingText}
@@ -97,7 +97,7 @@ export function LetterOpener({
           <Button
             onClick={() => setIsOpen(true)}
             size="lg"
-            className="animate-fade-in-up shadow-lg"
+            className="animate-fade-in-up shadow-lg text-lg px-10 py-8 rounded-full"
             style={{ animationDelay: "0.6s" }}
           >
             {buttonText}
@@ -108,7 +108,7 @@ export function LetterOpener({
   }
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden">
+    <div className="relative min-h-screen w-full overflow-hidden bg-gradient-to-br from-background to-secondary/30">
       <div className="absolute inset-0 z-0">
         {petals.map((p) => (
           <Petal key={p.id} style={p.style}>
@@ -118,9 +118,9 @@ export function LetterOpener({
       </div>
 
       <div className="relative z-10 flex items-center justify-center min-h-screen p-4 sm:p-8">
-        <Card className="w-full max-w-2xl bg-card/80 backdrop-blur-sm animate-fade-in-up shadow-2xl border-2 border-primary/20">
-          <CardContent className="p-6 sm:p-10">
-            <div className="font-body text-lg leading-relaxed text-foreground">
+        <Card className="w-full max-w-2xl bg-card/80 backdrop-blur-sm animate-fade-in-up shadow-2xl border-2 border-primary/20 rounded-2xl">
+          <CardContent className="p-8 sm:p-12">
+            <div className="font-body text-2xl md:text-3xl leading-loose text-foreground/90">
               {formattedLetter}
             </div>
           </CardContent>

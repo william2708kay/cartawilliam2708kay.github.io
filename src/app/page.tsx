@@ -18,11 +18,11 @@ export default async function Home() {
   }
 
   return (
-    <main className="bg-background">
+    <main className="bg-gradient-to-br from-background to-secondary/30">
       <LetterOpener
         letter={letterContent}
         openingText="Para Daiana"
-        buttonText="Abrir"
+        buttonText="Abrir Carta"
       />
     </main>
   );
