@@ -5,9 +5,9 @@ const letterContent = `Mi querida Daiana,
 
 Hola, Dais, ¿cómo estás? Estuve preparando esto en mis tiempos libres. Originalmente era para tu cumple, pero supongo que hoy es el final... En fin, ya que trabajo en esto, qué mejor forma de transformar mi trabajo en algo especial para ti.
 
-Gracias por acompañarme hoy a ver Superman. Es mi superhéroe favorito, junto con Spiderman, y aunque todavía no he visto esa, sé que estará genial. Me encanta el cine, pero lo más bonito de ir es tener tu compañía, siempre la disfruto muchísimo.
+Gracias por acompañarme hoy a ver Superman. Es mi superhéroe favorito, junto con Spiderman, y aunque todavía no he visto la película a la hora que escribo esto, sé que estará genial. Me encanta el cine, pero lo más bonito de ir es tener tu compañía; la disfruto muchísimo.
 
-Cada momento contigo, por simple que sea, se convierte en un recuerdo increíble. Eres esa persona que ilumina todo, y por eso te estoy tan agradecido.
+Cada momento contigo, por simple que sea, ha sido un regalo. A veces en la vida se gana o se pierde, y aunque no quería que lo nuestro terminara, atesoro cada instante que pasamos juntos. Te deseo todo lo mejor, señorita encantadora. Y si alguna vez te hice sentir mal o cometí un error, te pido perdón de todo corazón.
 
 Con todo mi amor,
 William`;
