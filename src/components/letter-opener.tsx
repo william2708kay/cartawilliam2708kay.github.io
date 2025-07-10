@@ -74,9 +74,6 @@ export function LetterOpener({
   const [isFinalButtonEnabled, setIsFinalButtonEnabled] = useState(true);
 
   const handleFinalButtonClick = () => {
-    // const unlockDate = new Date('2025-07-19T00:00:00');
-    // const now = new Date();
-
     if (isFinalButtonEnabled) {
       setStep('finalSurprise');
     } else {

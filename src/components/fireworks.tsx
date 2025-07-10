@@ -12,7 +12,7 @@ export const Fireworks = () => {
     const style: React.CSSProperties = {
       left: `${Math.random() * 100}%`,
       top: `${Math.random() * 100}%`,
-      animation: `firework-animation ${Math.random() * 1.2 + 0.8}s ${Math.random() * 3}s forwards`,
+      animation: `firework-animation ${Math.random() * 1.2 + 0.8}s ${Math.random() * 3}s infinite`,
       transform: `scale(${size})`,
       color: `hsl(${Math.random() * 40 + 320}, 90%, 70%)` // Hues for pinks/purples
     };
