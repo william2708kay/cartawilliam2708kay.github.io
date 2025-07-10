@@ -110,7 +110,7 @@ export function LetterOpener({
         <div className="relative text-center flex flex-col items-center">
           <LilyIcon className="absolute -top-16 -left-24 h-32 w-32 text-primary/30 opacity-20 -rotate-45 animate-pulse-slow" />
           <RoseIcon className="absolute -bottom-16 -right-24 h-32 w-32 text-accent/30 opacity-20 rotate-45 animate-pulse-slow" />
-          <div className="mb-8">
+          <div className="mb-8 w-[200px] h-[200px] flex items-center justify-center">
             <Image 
               src="/principal.gif" 
               alt="principal" 
