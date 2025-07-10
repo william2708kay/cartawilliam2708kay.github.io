@@ -96,14 +96,14 @@ export function LetterOpener({
     }
   }, [step]);
   
-  useEffect(() => {
-    if (step === 'playingVideo' && videoRef.current) {
-        videoRef.current.play().catch(() => {
-            // If autoplay fails, skip to the next step
-            setStep('specialMessage');
-        });
+  const playVideo = () => {
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => {
+        // If autoplay fails, skip to the next step
+        setStep('specialMessage');
+      });
     }
-  }, [step]);
+  };
 
   useEffect(() => {
     if (step === 'specialMessage') {
@@ -172,6 +172,7 @@ export function LetterOpener({
           src="/transicion.mp4"
           className="max-w-full max-h-full"
           onEnded={handleVideoEnd}
+          onCanPlay={playVideo}
           muted
           playsInline
           onError={() => setStep('specialMessage')} // Fallback if video fails to load
