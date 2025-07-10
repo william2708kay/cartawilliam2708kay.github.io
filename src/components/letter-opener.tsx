@@ -220,7 +220,7 @@ export function LetterOpener({
   if (step === 'finalSurprise') {
     return (
       <div 
-        className="flex items-center justify-center min-h-screen bg-cover bg-center"
+        className="flex items-center justify-center min-h-screen bg-cover bg-center bg-no-repeat bg-fixed"
         style={{ backgroundImage: "url('/para-la-carta.jpeg')" }}
         data-ai-hint="romantic letter background"
       >
