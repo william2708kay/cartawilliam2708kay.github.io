@@ -27,6 +27,27 @@ const Petal = ({
   </div>
 );
 
+const AnimatedText = ({ text }: { text: string }) => {
+  const [visibleText, setVisibleText] = useState("");
+  const typingSpeed = 50; // milliseconds per character
+
+  useEffect(() => {
+    if (text) {
+      let i = 0;
+      const interval = setInterval(() => {
+        setVisibleText(text.slice(0, i + 1));
+        i++;
+        if (i >= text.length) {
+          clearInterval(interval);
+        }
+      }, typingSpeed);
+      return () => clearInterval(interval);
+    }
+  }, [text]);
+
+  return <>{visibleText}</>;
+};
+
 export function LetterOpener({
   letter,
   openingText,
@@ -76,7 +97,7 @@ export function LetterOpener({
   const formattedLetter = useMemo(() => {
     return letter.split('\n').map((paragraph, index) => (
       <p key={index} className="mb-6 last:mb-0">
-        {paragraph}
+        {paragraph ? <AnimatedText text={paragraph} /> : <br />}
       </p>
     ));
   }, [letter]);
@@ -86,8 +107,8 @@ export function LetterOpener({
     return (
       <div className="flex flex-col items-center justify-center min-h-screen p-4 overflow-hidden">
         <div className="relative text-center">
-          <LilyIcon className="absolute -top-16 -left-24 h-32 w-32 text-primary/30 opacity-20 -rotate-45 animate-fade-in" />
-          <RoseIcon className="absolute -bottom-16 -right-24 h-32 w-32 text-accent/30 opacity-20 rotate-45 animate-fade-in" />
+          <LilyIcon className="absolute -top-16 -left-24 h-32 w-32 text-primary/30 opacity-20 -rotate-45 animate-pulse-slow" />
+          <RoseIcon className="absolute -bottom-16 -right-24 h-32 w-32 text-accent/30 opacity-20 rotate-45 animate-pulse-slow" />
           <h1
             className="text-6xl md:text-8xl font-headline mb-12 animate-fade-in-up"
             style={{ animationDelay: "0.2s" }}
