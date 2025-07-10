@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
+import Image from 'next/image';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { LilyIcon } from "@/components/icons/lily-icon";
@@ -106,9 +107,18 @@ export function LetterOpener({
   if (!isOpen) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen p-4 overflow-hidden">
-        <div className="relative text-center">
+        <div className="relative text-center flex flex-col items-center">
           <LilyIcon className="absolute -top-16 -left-24 h-32 w-32 text-primary/30 opacity-20 -rotate-45 animate-pulse-slow" />
           <RoseIcon className="absolute -bottom-16 -right-24 h-32 w-32 text-accent/30 opacity-20 rotate-45 animate-pulse-slow" />
+          <div className="mb-8">
+            <Image 
+              src="/principal.gif" 
+              alt="principal" 
+              width={200} 
+              height={200} 
+              unoptimized
+            />
+          </div>
           <h1
             className="text-6xl md:text-8xl font-headline mb-12 animate-fade-in-up"
             style={{ animationDelay: "0.2s" }}
