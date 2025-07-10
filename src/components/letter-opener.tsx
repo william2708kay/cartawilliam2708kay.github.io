@@ -7,6 +7,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { LilyIcon } from "@/components/icons/lily-icon";
 import { TulipIcon } from "@/components/icons/tulip-icon";
 import { RoseIcon } from "@/components/icons/rose-icon";
+import { useToast } from "@/hooks/use-toast";
+import { Heart } from "lucide-react";
 
 const Petal = ({
   style,
@@ -30,7 +32,7 @@ const Petal = ({
 
 const AnimatedText = ({ text }: { text: string }) => {
   const [visibleText, setVisibleText] = useState("");
-  const typingSpeed = 50; // milliseconds per character
+  const typingSpeed = 80; // milliseconds per character, slowed down
 
   useEffect(() => {
     if (text) {
@@ -58,7 +60,7 @@ export function LetterOpener({
   openingText: string;
   buttonText: string;
 }) {
-  const [step, setStep] = useState<'initial' | 'playingVideo' | 'specialMessage' | 'showingLetter'>('initial');
+  const [step, setStep] = useState<'initial' | 'playingVideo' | 'specialMessage' | 'showingLetter' | 'finalSurprise'>('initial');
   const [petals, setPetals] = useState<
     {
       id: number;
@@ -67,6 +69,29 @@ export function LetterOpener({
     }[]
   >([]);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const { toast } = useToast();
+  const [isFinalButtonEnabled, setIsFinalButtonEnabled] = useState(false);
+
+  // Date logic inside useEffect to avoid hydration issues
+  useEffect(() => {
+    const targetDate = new Date('2025-07-19T00:00:00');
+    const currentDate = new Date();
+    if (currentDate >= targetDate) {
+      setIsFinalButtonEnabled(true);
+    }
+  }, []);
+  
+  const handleFinalButtonClick = () => {
+    if (isFinalButtonEnabled) {
+      setStep('finalSurprise');
+    } else {
+      toast({
+        title: "Aún no es tiempo...",
+        description: "Un poco de paciencia, el amor verdadero sabe esperar. ❤️",
+        duration: 5000,
+      });
+    }
+  };
 
   useEffect(() => {
     if (step === 'showingLetter') {
@@ -158,7 +183,7 @@ export function LetterOpener({
           ref={videoRef}
           className="max-w-full max-h-full"
           onEnded={() => setStep('specialMessage')}
-          onError={() => setStep('specialMessage')}
+          onError={() => setStep('specialMessage')} // Go to next step if video fails
           onLoadedData={(e) => e.currentTarget.play().catch(() => setStep('specialMessage'))}
           muted
           playsInline
@@ -179,6 +204,19 @@ export function LetterOpener({
       </div>
     );
   }
+  
+  if (step === 'finalSurprise') {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-background">
+        <div className="text-center p-4">
+          <Heart className="w-24 h-24 text-red-500 mx-auto mb-8 animate-pulse" />
+          <h1 className="text-5xl md:text-7xl font-headline text-foreground animate-fade-in-up">
+            Gracias por esperar. <br/> Nuestro amor es eterno.
+          </h1>
+        </div>
+      </div>
+    );
+  }
 
   if (step === 'showingLetter') {
     return (
@@ -191,7 +229,7 @@ export function LetterOpener({
           ))}
         </div>
   
-        <div className="relative z-10 flex items-center justify-center min-h-screen p-4 sm:p-8">
+        <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-4 sm:p-8">
           <Card className="w-full max-w-2xl bg-card/80 backdrop-blur-sm animate-fade-in-up shadow-2xl border-2 border-primary/20 rounded-2xl">
             <CardContent className="p-8 sm:p-12">
               <div className="font-body text-2xl md:text-3xl leading-loose text-foreground/90">
@@ -199,6 +237,23 @@ export function LetterOpener({
               </div>
             </CardContent>
           </Card>
+          <div className="mt-8 animate-fade-in-up" style={{ animationDelay: '1s' }}>
+            <Button
+              onClick={handleFinalButtonClick}
+              size="lg"
+              className={`shadow-lg text-lg px-10 py-8 rounded-full transition-all duration-300 ${
+                !isFinalButtonEnabled ? 'cursor-not-allowed opacity-60 bg-muted' : 'animate-pulse'
+              }`}
+            >
+              <Heart className="mr-3" />
+              {isFinalButtonEnabled ? 'Abrir Sorpresa Final' : 'Una sorpresa para el futuro'}
+            </Button>
+            {!isFinalButtonEnabled && (
+              <p className="text-center mt-4 text-sm text-foreground/70">
+                Se desbloqueará el 19 de Julio de 2025
+              </p>
+            )}
+          </div>
         </div>
       </div>
     );
