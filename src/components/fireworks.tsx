@@ -7,15 +7,14 @@ const Firework = ({ style }: { style: React.CSSProperties }) => (
 );
 
 export const Fireworks = () => {
-  const fireworks = Array.from({ length: 15 }).map((_, i) => {
-    const style = {
+  const fireworks = Array.from({ length: 50 }).map((_, i) => {
+    const size = Math.random() * 0.5 + 0.75; // Random size from 0.75 to 1.25
+    const style: React.CSSProperties = {
       left: `${Math.random() * 100}%`,
       top: `${Math.random() * 100}%`,
-      // Slower animation, longer delay
-      animation: `firework-animation ${Math.random() * 1.5 + 1}s ${Math.random() * 5 + 2}s infinite`,
-      transform: `scale(${Math.random() * 0.5 + 0.5})`,
-      // Hue values for pinks (approx 320 to 350)
-      backgroundColor: `hsl(${Math.random() * 30 + 320}, 90%, 80%)`,
+      animation: `firework-animation ${Math.random() * 1.2 + 0.8}s ${Math.random() * 3}s forwards`,
+      transform: `scale(${size})`,
+      color: `hsl(${Math.random() * 40 + 320}, 90%, 70%)` // Hues for pinks/purples
     };
     return <Firework key={i} style={style} />;
   });
