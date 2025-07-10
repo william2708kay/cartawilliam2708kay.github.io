@@ -109,7 +109,6 @@ export function LetterOpener({
     if (step === 'playingVideo' && videoRef.current) {
       videoRef.current.play().catch(error => {
         console.error("Video play failed:", error);
-        // If autoplay is blocked, skip to the next step
         setStep('specialMessage');
       });
     }
@@ -141,7 +140,7 @@ export function LetterOpener({
           <RoseIcon className="absolute -bottom-16 -right-24 h-32 w-32 text-accent/30 opacity-20 rotate-45 animate-pulse-slow" />
           <div className="mb-8 w-[200px] h-[200px] flex items-center justify-center">
              <img 
-              src="/principal.gif"
+              src="/images_carta/principal.gif"
               alt="principal" 
               width={200} 
               height={200}
@@ -171,7 +170,7 @@ export function LetterOpener({
       <div className="fixed inset-0 bg-black flex items-center justify-center">
         <video
           ref={videoRef}
-          src="/transicion.mp4"
+          src="/images_carta/transicion.mp4"
           className="max-w-full max-h-full"
           onEnded={handleVideoEnd}
           onError={handleVideoEnd}
