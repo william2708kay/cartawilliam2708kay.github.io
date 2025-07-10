@@ -133,15 +133,11 @@ export function LetterOpener({
   useEffect(() => {
     if (step === 'playingVideo' && videoRef.current) {
       const video = videoRef.current;
-      const playPromise = video.play();
-
-      if (playPromise !== undefined) {
-        playPromise.catch(error => {
-          console.error("Error al intentar reproducir el video:", error);
-          // Si falla la reproducción, pasamos al siguiente paso
-          setStep('specialMessage');
-        });
-      }
+      video.play().catch(error => {
+        console.error("Error al intentar reproducir el video:", error);
+        // If playback fails, move to the next step
+        setStep('specialMessage');
+      });
     }
   }, [step]);
 
@@ -224,11 +220,17 @@ export function LetterOpener({
   if (step === 'finalSurprise') {
     return (
       <div className="flex items-center justify-center min-h-screen bg-background">
-        <div className="text-center p-4">
+        <div className="text-center p-6 md:p-8">
           <Heart className="w-24 h-24 text-red-500 mx-auto mb-8 animate-pulse" />
-          <h1 className="text-5xl md:text-7xl font-headline text-foreground animate-fade-in-up">
-            ¡Feliz Cumpleaños, mi amor! <br/> Que este día esté lleno de alegría y amor. Te amo.
+          <h1 className="text-4xl md:text-6xl font-headline text-foreground animate-fade-in-up">
+            Feliz Cumpleaños Daiana
           </h1>
+          <div className="mt-6 text-xl md:text-2xl text-foreground/80 animate-fade-in-up space-y-4" style={{ animationDelay: "0.5s" }}>
+            <p>Sé que ya no estoy ahí para ti, pero que este día esté lleno de alegría y amor.</p>
+            <p>Te quiero mucho y te extraño.</p>
+            <p>Espero que tus metas se cumplan y éxitos en todo, señorita.</p>
+            <p className="mt-8 font-bold">- Con mucho amor, William</p>
+          </div>
         </div>
       </div>
     );
