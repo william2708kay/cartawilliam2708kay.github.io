@@ -224,7 +224,6 @@ export function LetterOpener({
         data-ai-hint="romantic letter background"
       >
         <Fireworks />
-        <div className="absolute inset-0 bg-black/50" />
         <div className="relative text-center p-6 md:p-8 z-10">
           <Heart className="w-24 h-24 text-red-500 mx-auto mb-8 animate-pulse" />
           <h1 className="text-4xl md:text-6xl font-headline text-white animate-fade-in-up">
