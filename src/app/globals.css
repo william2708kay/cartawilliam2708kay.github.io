@@ -139,3 +139,14 @@ body {
   from, to { border-color: transparent }
   50% { border-color: hsl(var(--foreground)) }
 }
+
+@keyframes pulse-slow {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.2;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.3;
+  }
+}
