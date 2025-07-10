@@ -7,9 +7,9 @@ Hola, Dais, ¿cómo estás? Estuve preparando esto en mis tiempos libres. Origin
 
 Gracias por acompañarme hoy a ver Superman. Es mi superhéroe favorito, junto con Spiderman, y aunque todavía no he visto la película a la hora que escribo esto, sé que estará genial. Me encanta el cine, pero lo más bonito de ir es tener tu compañía; la disfruto muchísimo.
 
-Cada momento contigo, por simple que sea, ha sido un regalo. A veces en la vida se gana o se pierde, y aunque no quería que lo nuestro terminara, atesoro cada instante que pasamos juntos. Te deseo todo lo mejor, señorita encantadora. Y si alguna vez te hice sentir mal o cometí un error, te pido perdón de todo corazón.
+Cada momento contigo, por simple que sea, ha sido un regalo. A veces se gana o se pierde, y aunque no quería que esto terminara asi, atesoro cada instante que pasamos juntos. Te deseo todo lo mejor, señorita encantadora. Y si alguna vez te hice sentir mal o cometí un error, te pido perdón de todo corazón.
 
-Con todo mi amor,
+Atentamente,
 William`;
 
 export default function Home() {
