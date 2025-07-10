@@ -1,13 +1,13 @@
+
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import Image from 'next/image';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { LilyIcon } from "@/components/icons/lily-icon";
 import { TulipIcon } from "@/components/icons/tulip-icon";
 import { RoseIcon } from "@/components/icons/rose-icon";
-import principalGif from '@/images_carta/principal.gif';
 
 const Petal = ({
   style,
@@ -59,7 +59,7 @@ export function LetterOpener({
   openingText: string;
   buttonText: string;
 }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [step, setStep] = useState<'initial' | 'playingVideo' | 'specialMessage' | 'showingLetter'>('initial');
   const [petals, setPetals] = useState<
     {
       id: number;
@@ -67,9 +67,10 @@ export function LetterOpener({
       icon: JSX.Element;
     }[]
   >([]);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    if (isOpen) {
+    if (step === 'showingLetter') {
       const newPetals = Array.from({ length: 30 }).map((_, i) => {
         let icon;
         const rand = Math.random();
@@ -94,7 +95,33 @@ export function LetterOpener({
       });
       setPetals(newPetals);
     }
-  }, [isOpen]);
+  }, [step]);
+
+  useEffect(() => {
+    if (step === 'playingVideo' && videoRef.current) {
+      videoRef.current.play().catch(error => {
+        console.error("Video play failed:", error);
+        handleVideoEnd();
+      });
+    }
+  }, [step]);
+  
+  useEffect(() => {
+    if (step === 'specialMessage') {
+      const timer = setTimeout(() => {
+        setStep('showingLetter');
+      }, 4000); // Show message for 4 seconds
+      return () => clearTimeout(timer);
+    }
+  }, [step]);
+
+  const handleOpenClick = () => {
+    setStep('playingVideo');
+  };
+
+  const handleVideoEnd = () => {
+    setStep('specialMessage');
+  };
 
   const formattedLetter = useMemo(() => {
     return letter.split('\n').map((paragraph, index) => (
@@ -105,7 +132,7 @@ export function LetterOpener({
   }, [letter]);
 
 
-  if (!isOpen) {
+  if (step === 'initial') {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen p-4 overflow-hidden">
         <div className="relative text-center flex flex-col items-center">
@@ -113,7 +140,7 @@ export function LetterOpener({
           <RoseIcon className="absolute -bottom-16 -right-24 h-32 w-32 text-accent/30 opacity-20 rotate-45 animate-pulse-slow" />
           <div className="mb-8 w-[200px] h-[200px] flex items-center justify-center">
             <Image 
-              src={principalGif}
+              src="/images_carta/principal.gif"
               alt="principal" 
               width={200} 
               height={200} 
@@ -127,9 +154,9 @@ export function LetterOpener({
             {openingText}
           </h1>
           <Button
-            onClick={() => setIsOpen(true)}
+            onClick={handleOpenClick}
             size="lg"
-            className="animate-fade-in-up shadow-lg text-lg px-10 py-8 rounded-full"
+            className="animate-fade-in-up shadow-lg text-lg px-10 py-8 rounded-full animate-pulse"
             style={{ animationDelay: "0.6s" }}
           >
             {buttonText}
@@ -139,25 +166,55 @@ export function LetterOpener({
     );
   }
 
-  return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-gradient-to-br from-background to-secondary/30">
-      <div className="absolute inset-0 z-0">
-        {petals.map((p) => (
-          <Petal key={p.id} style={p.style}>
-            {p.icon}
-          </Petal>
-        ))}
+  if (step === 'playingVideo') {
+    return (
+      <div className="fixed inset-0 bg-black flex items-center justify-center">
+        <video
+          ref={videoRef}
+          src="/images_carta/transicion.mp4"
+          onEnded={handleVideoEnd}
+          onError={handleVideoEnd}
+          className="w-full h-full object-cover"
+          muted
+          playsInline
+        />
       </div>
+    );
+  }
 
-      <div className="relative z-10 flex items-center justify-center min-h-screen p-4 sm:p-8">
-        <Card className="w-full max-w-2xl bg-card/80 backdrop-blur-sm animate-fade-in-up shadow-2xl border-2 border-primary/20 rounded-2xl">
-          <CardContent className="p-8 sm:p-12">
-            <div className="font-body text-2xl md:text-3xl leading-loose text-foreground/90">
-              {formattedLetter}
-            </div>
-          </CardContent>
-        </Card>
+  if (step === 'specialMessage') {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-background">
+        <h1 className="text-5xl md:text-7xl font-headline text-foreground animate-fade-in-up">
+          PARA MI PERSONA ESPECIAL
+        </h1>
       </div>
-    </div>
-  );
+    );
+  }
+
+  if (step === 'showingLetter') {
+    return (
+      <div className="relative min-h-screen w-full overflow-hidden bg-gradient-to-br from-background to-secondary/30">
+        <div className="absolute inset-0 z-0">
+          {petals.map((p) => (
+            <Petal key={p.id} style={p.style}>
+              {p.icon}
+            </Petal>
+          ))}
+        </div>
+  
+        <div className="relative z-10 flex items-center justify-center min-h-screen p-4 sm:p-8">
+          <Card className="w-full max-w-2xl bg-card/80 backdrop-blur-sm animate-fade-in-up shadow-2xl border-2 border-primary/20 rounded-2xl">
+            <CardContent className="p-8 sm:p-12">
+              <div className="font-body text-2xl md:text-3xl leading-loose text-foreground/90">
+                {formattedLetter}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
+  }
+
+  return null;
 }
