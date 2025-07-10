@@ -59,7 +59,6 @@ export function LetterOpener({
   buttonText: string;
 }) {
   const [step, setStep] = useState<'initial' | 'playingVideo' | 'specialMessage' | 'showingLetter'>('initial');
-  const videoRef = useRef<HTMLVideoElement>(null);
   const [petals, setPetals] = useState<
     {
       id: number;
@@ -95,15 +94,6 @@ export function LetterOpener({
       setPetals(newPetals);
     }
   }, [step]);
-  
-  const playVideo = () => {
-    if (videoRef.current) {
-      videoRef.current.play().catch(() => {
-        // If autoplay fails, skip to the next step
-        setStep('specialMessage');
-      });
-    }
-  };
 
   useEffect(() => {
     if (step === 'specialMessage') {
@@ -168,14 +158,13 @@ export function LetterOpener({
     return (
       <div className="fixed inset-0 bg-black flex items-center justify-center">
         <video
-          ref={videoRef}
           src="/transicion.mp4"
           className="max-w-full max-h-full"
           onEnded={handleVideoEnd}
-          onCanPlay={playVideo}
+          onError={() => setStep('specialMessage')}
+          autoPlay
           muted
           playsInline
-          onError={() => setStep('specialMessage')} // Fallback if video fails to load
         />
       </div>
     );
