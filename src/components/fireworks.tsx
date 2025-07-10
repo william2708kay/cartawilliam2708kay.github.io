@@ -8,7 +8,7 @@ const Firework = ({ style }: { style: React.CSSProperties }) => (
 
 export const Fireworks = () => {
   const fireworks = Array.from({ length: 50 }).map((_, i) => {
-    const size = Math.random() * 0.5 + 0.75; // Random size from 0.75 to 1.25
+    const size = Math.random() * 0.8 + 0.8; // Random size from 0.8 to 1.6
     const style: React.CSSProperties = {
       left: `${Math.random() * 100}%`,
       top: `${Math.random() * 100}%`,

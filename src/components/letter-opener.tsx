@@ -231,7 +231,7 @@ export function LetterOpener({
             Feliz Cumpleaños Daiana
           </h1>
           <div className="mt-6 text-xl md:text-2xl text-white/90 animate-fade-in-up space-y-4" style={{ animationDelay: "0.5s" }}>
-            <p>Sé que ya no estoy ahí para ti, pero que este día esté lleno de alegría y amor.</p>
+            <p>Sé que ya no estoy ahí para ti pero me hubiera encantado llevarte a mis lugares preferidos, comer hasta engordar, tenerte de la mano... en fin, no quiero estar sentimental ni nada, pero que este día esté lleno de alegría y amor.</p>
             <p>Te quiero mucho y te extraño.</p>
             <p>Espero que tus metas se cumplan y éxitos en todo, señorita. Créeme que siempre te tendré en mi mente como un lindo recuerdo.</p>
             <p className="mt-8 font-bold">- Con mucho amor, William</p>
