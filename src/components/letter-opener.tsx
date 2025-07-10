@@ -62,7 +62,7 @@ export function LetterOpener({
   openingText: string;
   buttonText: string;
 }) {
-  const [step, setStep] = useState<'initial' | 'playingVideo' | 'specialMessage' | 'showingLetter' | 'finalSurprise'>('initial');
+  const [step, setStep] = useState<'initial' | 'specialMessage' | 'showingLetter' | 'finalSurprise'>('initial');
   const [petals, setPetals] = useState<
     {
       id: number;
@@ -70,7 +70,6 @@ export function LetterOpener({
       icon: JSX.Element;
     }[]
   >([]);
-  const videoRef = useRef<HTMLVideoElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
   const { toast } = useToast();
   const [isFinalButtonEnabled, setIsFinalButtonEnabled] = useState(true);
@@ -131,16 +130,6 @@ export function LetterOpener({
   }, [step]);
   
   useEffect(() => {
-    if (step === 'playingVideo' && videoRef.current) {
-      const video = videoRef.current;
-      video.play().catch(error => {
-        console.error("Error al intentar reproducir el video:", error);
-        setStep('specialMessage');
-      });
-    }
-  }, [step]);
-  
-  useEffect(() => {
     const audio = audioRef.current;
     if (step === 'finalSurprise' && audio) {
       audio.volume = 0.2; // Set low volume
@@ -154,7 +143,7 @@ export function LetterOpener({
 
 
   const handleOpenClick = () => {
-    setStep('playingVideo');
+    setStep('specialMessage');
   };
   
   const formattedLetter = useMemo(() => {
@@ -207,31 +196,17 @@ export function LetterOpener({
     );
   }
 
-  if (step === 'playingVideo') {
-    return (
-      <div className="fixed inset-0 bg-black flex items-center justify-center">
-        <video
-          ref={videoRef}
-          className="max-w-full max-h-full"
-          onLoadedData={(e) => e.currentTarget.play().catch(() => setStep('specialMessage'))}
-          onEnded={() => setStep('specialMessage')}
-          onError={() => setStep('specialMessage')}
-          muted
-          playsInline
-        >
-          <source src="/transicion.mp4" type="video/mp4" />
-          Tu navegador no soporta el tag de video.
-        </video>
-      </div>
-    );
-  }
-
   if (step === 'specialMessage') {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-background">
-        <h1 className="text-5xl md:text-7xl font-headline text-foreground animate-fade-in-up">
-          PARA MI PERSONA ESPECIAL
-        </h1>
+      <div className="flex items-center justify-center min-h-screen bg-background animate-fade-in">
+        <div className="relative text-center">
+            <Heart className="w-12 h-12 text-primary absolute -top-16 left-1/2 -translate-x-1/2 animate-pulse" style={{ animationDelay: '0.2s' }} />
+            <Heart className="w-8 h-8 text-primary/70 absolute top-8 -left-20 animate-pulse" style={{ animationDelay: '0.4s' }} />
+            <Heart className="w-8 h-8 text-primary/70 absolute bottom-8 -right-20 animate-pulse" style={{ animationDelay: '0.6s' }} />
+            <h1 className="text-5xl md:text-7xl font-headline text-foreground animate-fade-in-up">
+            PARA MI PERSONA ESPECIAL
+            </h1>
+        </div>
       </div>
     );
   }
