@@ -73,6 +73,9 @@ export function LetterOpener({
   const [isFinalButtonEnabled, setIsFinalButtonEnabled] = useState(true);
 
   const handleFinalButtonClick = () => {
+    // const unlockDate = new Date('2025-07-19T00:00:00');
+    // const now = new Date();
+
     if (isFinalButtonEnabled) {
       setStep('finalSurprise');
     } else {
@@ -83,6 +86,12 @@ export function LetterOpener({
       });
     }
   };
+
+  useEffect(() => {
+    // const unlockDate = new Date('2025-07-19T00:00:00');
+    // const now = new Date();
+    // setIsFinalButtonEnabled(now >= unlockDate);
+  }, []);
 
   useEffect(() => {
     if (step === 'showingLetter') {
@@ -120,6 +129,22 @@ export function LetterOpener({
       return () => clearTimeout(timer);
     }
   }, [step]);
+  
+  useEffect(() => {
+    if (step === 'playingVideo' && videoRef.current) {
+      const video = videoRef.current;
+      const playPromise = video.play();
+
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          console.error("Error al intentar reproducir el video:", error);
+          // Si falla la reproducción, pasamos al siguiente paso
+          setStep('specialMessage');
+        });
+      }
+    }
+  }, [step]);
+
 
   const handleOpenClick = () => {
     setStep('playingVideo');
@@ -173,9 +198,9 @@ export function LetterOpener({
         <video
           ref={videoRef}
           className="max-w-full max-h-full"
-          onEnded={() => setStep('specialMessage')}
-          onError={() => setStep('specialMessage')} // Go to next step if video fails
           onLoadedData={(e) => e.currentTarget.play().catch(() => setStep('specialMessage'))}
+          onEnded={() => setStep('specialMessage')}
+          onError={() => setStep('specialMessage')}
           muted
           playsInline
         >
@@ -202,7 +227,7 @@ export function LetterOpener({
         <div className="text-center p-4">
           <Heart className="w-24 h-24 text-red-500 mx-auto mb-8 animate-pulse" />
           <h1 className="text-5xl md:text-7xl font-headline text-foreground animate-fade-in-up">
-            Gracias por esperar. <br/> Nuestro amor es eterno.
+            ¡Feliz Cumpleaños, mi amor! <br/> Que este día esté lleno de alegría y amor. Te amo.
           </h1>
         </div>
       </div>
