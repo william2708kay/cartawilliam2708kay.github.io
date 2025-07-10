@@ -76,7 +76,7 @@ export function LetterOpener({
         } else if (rand < 0.66) {
           icon = <TulipIcon className="w-6 h-6" />;
         } else {
-          icon = <RoseIcon className="w-6 h-6 text-pink-300" />;
+          icon = <RoseIcon className="w-6 h-6" />;
         }
 
         return {
