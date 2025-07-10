@@ -7,8 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { LilyIcon } from "@/components/icons/lily-icon";
 import { TulipIcon } from "@/components/icons/tulip-icon";
 import { RoseIcon } from "@/components/icons/rose-icon";
-
-// import principalGif from '@/images/principal.gif'; // The app will use this once you add the file.
+import principalGif from '@/images_carta/principal.gif';
 
 const Petal = ({
   style,
@@ -113,21 +112,12 @@ export function LetterOpener({
           <LilyIcon className="absolute -top-16 -left-24 h-32 w-32 text-primary/30 opacity-20 -rotate-45 animate-pulse-slow" />
           <RoseIcon className="absolute -bottom-16 -right-24 h-32 w-32 text-accent/30 opacity-20 rotate-45 animate-pulse-slow" />
           <div className="mb-8 w-[200px] h-[200px] flex items-center justify-center">
-            {/* This is a placeholder. Once you add 'principal.gif' to 'src/images', 
-                uncomment the import on line 10 and replace this Image component with the one below.
             <Image 
               src={principalGif}
               alt="principal" 
               width={200} 
               height={200} 
               unoptimized
-            /> */}
-             <Image 
-              src="https://placehold.co/200x200.gif"
-              alt="A beautiful animation" 
-              width={200} 
-              height={200}
-              data-ai-hint="love letter"
             />
           </div>
           <h1
