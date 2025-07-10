@@ -67,12 +67,13 @@ export function LetterOpener({
     }[]
   >([]);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const videoStartTime = useRef<number>(0);
 
   useEffect(() => {
     if (step === 'playingVideo' && videoRef.current) {
+      videoStartTime.current = Date.now();
       videoRef.current.play().catch(error => {
         console.error("Error al intentar reproducir el video:", error);
-        // Si la reproducción falla, saltamos al siguiente paso
         handleVideoEnd();
       });
     }
@@ -120,7 +121,15 @@ export function LetterOpener({
   };
 
   const handleVideoEnd = () => {
-    setStep('specialMessage');
+    const video = videoRef.current;
+    if (!video) {
+        setStep('specialMessage');
+        return;
+    }
+    // Previene la transición si el video no ha terminado o ha fallado instantáneamente
+    if (video.ended || (Date.now() - videoStartTime.current > 500)) {
+        setStep('specialMessage');
+    }
   };
 
   const formattedLetter = useMemo(() => {
