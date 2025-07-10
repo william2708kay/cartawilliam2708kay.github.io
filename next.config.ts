@@ -20,7 +20,7 @@ const nextConfig: NextConfig = {
   },
    webpack(config) {
     config.module.rules.push({
-      test: /\.(mp4|webm)$/,
+      test: /\.(mp4|webm|gif)$/,
       use: {
         loader: 'file-loader',
         options: {

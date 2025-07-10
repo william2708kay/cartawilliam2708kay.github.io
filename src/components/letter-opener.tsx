@@ -141,7 +141,7 @@ export function LetterOpener({
           <RoseIcon className="absolute -bottom-16 -right-24 h-32 w-32 text-accent/30 opacity-20 rotate-45 animate-pulse-slow" />
           <div className="mb-8 w-[200px] h-[200px] flex items-center justify-center">
              <img 
-              src={principalGif.src}
+              src={principalGif.src || principalGif}
               alt="principal" 
               width={200} 
               height={200}
@@ -171,7 +171,7 @@ export function LetterOpener({
       <div className="fixed inset-0 bg-black flex items-center justify-center">
         <video
           ref={videoRef}
-          src={transicionVideo.src}
+          src={transicionVideo.src || transicionVideo}
           className="max-w-full max-h-full"
           onEnded={handleVideoEnd}
           muted
