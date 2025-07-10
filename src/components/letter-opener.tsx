@@ -72,7 +72,7 @@ export function LetterOpener({
   >([]);
   const audioRef = useRef<HTMLAudioElement>(null);
   const { toast } = useToast();
-  const [isFinalButtonEnabled, setIsFinalButtonEnabled] = useState(true);
+  const [isFinalButtonEnabled, setIsFinalButtonEnabled] = useState(false);
 
   const handleFinalButtonClick = () => {
     if (isFinalButtonEnabled) {
@@ -87,9 +87,9 @@ export function LetterOpener({
   };
 
   useEffect(() => {
-    // const unlockDate = new Date('2025-07-19T00:00:00');
-    // const now = new Date();
-    // setIsFinalButtonEnabled(now >= unlockDate);
+    const unlockDate = new Date('2025-07-19T00:00:00');
+    const now = new Date();
+    setIsFinalButtonEnabled(now >= unlockDate);
   }, []);
 
   useEffect(() => {
