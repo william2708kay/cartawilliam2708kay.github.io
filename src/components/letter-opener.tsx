@@ -94,7 +94,7 @@ export function LetterOpener({
   }, []);
 
   useEffect(() => {
-    if (step === 'showingLetter') {
+    if (step === 'showingLetter' || step === 'initial') {
       const newPetals = Array.from({ length: 30 }).map((_, i) => {
         let icon;
         const rand = Math.random();
@@ -169,6 +169,13 @@ export function LetterOpener({
   if (step === 'initial') {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen p-4 overflow-hidden">
+         <div className="absolute inset-0 z-0">
+          {petals.map((p) => (
+            <Petal key={p.id} style={p.style}>
+              {p.icon}
+            </Petal>
+          ))}
+        </div>
         <div className="relative text-center flex flex-col items-center">
           <LilyIcon className="absolute -top-16 -left-24 h-32 w-32 text-primary/30 opacity-20 -rotate-45 animate-pulse-slow" />
           <RoseIcon className="absolute -bottom-16 -right-24 h-32 w-32 text-accent/30 opacity-20 rotate-45 animate-pulse-slow" />
