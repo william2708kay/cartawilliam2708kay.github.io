@@ -259,6 +259,7 @@ export function LetterOpener({
                   height={400}
                   className="rounded-lg shadow-lg"
                   data-ai-hint="romantic couple"
+                  unoptimized
                 />
               </div>
               <div className="font-body text-2xl md:text-3xl leading-loose text-foreground/90">
