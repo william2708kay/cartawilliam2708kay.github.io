@@ -80,7 +80,7 @@ export function LetterOpener({
     } else {
       toast({
         title: "Aún no es tiempo...",
-        description: "Un poco de paciencia, el amor verdadero sabe esperar. ❤️",
+        description: "señorita desesperada. ❤️",
         duration: 5000,
       });
     }
@@ -253,6 +253,16 @@ export function LetterOpener({
         <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-4 sm:p-8">
           <Card className="w-full max-w-2xl bg-card/80 backdrop-blur-sm animate-fade-in-up shadow-2xl border-2 border-primary/20 rounded-2xl">
             <CardContent className="p-8 sm:p-12">
+               <div className="mb-8 flex justify-center">
+                <Image
+                  src="/dentrolacarta.jpeg"
+                  alt="Recuerdo especial"
+                  width={400}
+                  height={400}
+                  className="rounded-lg shadow-lg"
+                  data-ai-hint="romantic couple"
+                />
+              </div>
               <div className="font-body text-2xl md:text-3xl leading-loose text-foreground/90">
                 {formattedLetter}
               </div>
