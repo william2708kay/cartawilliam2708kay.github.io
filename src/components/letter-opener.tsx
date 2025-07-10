@@ -70,10 +70,19 @@ export function LetterOpener({
 
   useEffect(() => {
     if (step === 'playingVideo' && videoRef.current) {
-      videoRef.current.play().catch(error => {
-        console.error("Error al intentar reproducir el video:", error);
-        setStep('specialMessage');
+      const video = videoRef.current;
+      let isCancelled = false;
+
+      video.play().catch(error => {
+        if (!isCancelled) {
+          console.error("Video play failed:", error);
+          setStep('specialMessage');
+        }
       });
+      
+      return () => {
+        isCancelled = true;
+      };
     }
   }, [step]);
 
