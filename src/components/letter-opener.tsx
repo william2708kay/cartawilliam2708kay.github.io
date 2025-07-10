@@ -71,6 +71,7 @@ export function LetterOpener({
     }[]
   >([]);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
   const { toast } = useToast();
   const [isFinalButtonEnabled, setIsFinalButtonEnabled] = useState(true);
 
@@ -137,6 +138,18 @@ export function LetterOpener({
         setStep('specialMessage');
       });
     }
+  }, [step]);
+  
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (step === 'finalSurprise' && audio) {
+      audio.volume = 0.2; // Set low volume
+      audio.play().catch(error => console.error("Error al reproducir audio:", error));
+    }
+    
+    return () => {
+      audio?.pause();
+    };
   }, [step]);
 
 
@@ -224,6 +237,10 @@ export function LetterOpener({
         data-ai-hint="romantic letter background"
       >
         <Fireworks />
+        <audio ref={audioRef} loop hidden>
+          <source src="/music.mp3" type="audio/mpeg" />
+          Tu navegador no soporta el elemento de audio.
+        </audio>
         <div className="relative text-center p-6 md:p-8 z-10 bg-white/20 backdrop-blur-sm rounded-2xl shadow-lg">
           <Heart className="w-24 h-24 text-red-500 mx-auto mb-8 animate-pulse" />
           <h1 className="text-4xl md:text-6xl font-headline text-foreground animate-fade-in-up">
