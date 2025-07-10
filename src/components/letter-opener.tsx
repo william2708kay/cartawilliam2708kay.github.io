@@ -67,14 +67,12 @@ export function LetterOpener({
     }[]
   >([]);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const videoStartTime = useRef<number>(0);
 
   useEffect(() => {
     if (step === 'playingVideo' && videoRef.current) {
-      videoStartTime.current = Date.now();
       videoRef.current.play().catch(error => {
         console.error("Error al intentar reproducir el video:", error);
-        handleVideoEnd();
+        setStep('specialMessage');
       });
     }
   }, [step]);
@@ -119,19 +117,7 @@ export function LetterOpener({
   const handleOpenClick = () => {
     setStep('playingVideo');
   };
-
-  const handleVideoEnd = () => {
-    const video = videoRef.current;
-    if (!video) {
-        setStep('specialMessage');
-        return;
-    }
-    // Previene la transición si el video no ha terminado o ha fallado instantáneamente
-    if (video.ended || (Date.now() - videoStartTime.current > 500)) {
-        setStep('specialMessage');
-    }
-  };
-
+  
   const formattedLetter = useMemo(() => {
     return letter.split('\n').map((paragraph, index) => (
       <p key={index} className="mb-6 last:mb-0">
@@ -180,8 +166,8 @@ export function LetterOpener({
         <video
           ref={videoRef}
           className="max-w-full max-h-full"
-          onEnded={handleVideoEnd}
-          onError={handleVideoEnd}
+          onEnded={() => setStep('specialMessage')}
+          onError={() => setStep('specialMessage')}
           muted
           playsInline
         >
