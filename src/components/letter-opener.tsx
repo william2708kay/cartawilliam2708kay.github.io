@@ -2,13 +2,13 @@
 "use client";
 
 import { useState, useEffect, useMemo, useRef } from "react";
-import Image from 'next/image';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { LilyIcon } from "@/components/icons/lily-icon";
 import { TulipIcon } from "@/components/icons/tulip-icon";
 import { RoseIcon } from "@/components/icons/rose-icon";
 import principalGif from '@/images_carta/principal.gif';
+import transicionVideo from '@/images_carta/transicion.mp4';
 
 const Petal = ({
   style,
@@ -60,7 +60,8 @@ export function LetterOpener({
   openingText: string;
   buttonText: string;
 }) {
-  const [step, setStep] = useState<'initial' | 'specialMessage' | 'showingLetter'>('initial');
+  const [step, setStep] = useState<'initial' | 'playingVideo' | 'specialMessage' | 'showingLetter'>('initial');
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [petals, setPetals] = useState<
     {
       id: number;
@@ -98,6 +99,15 @@ export function LetterOpener({
   }, [step]);
   
   useEffect(() => {
+    if (step === 'playingVideo' && videoRef.current) {
+        videoRef.current.play().catch(() => {
+            // If autoplay fails, skip to the next step
+            setStep('specialMessage');
+        });
+    }
+  }, [step]);
+
+  useEffect(() => {
     if (step === 'specialMessage') {
       const timer = setTimeout(() => {
         setStep('showingLetter');
@@ -107,6 +117,10 @@ export function LetterOpener({
   }, [step]);
 
   const handleOpenClick = () => {
+    setStep('playingVideo');
+  };
+
+  const handleVideoEnd = () => {
     setStep('specialMessage');
   };
 
@@ -126,12 +140,11 @@ export function LetterOpener({
           <LilyIcon className="absolute -top-16 -left-24 h-32 w-32 text-primary/30 opacity-20 -rotate-45 animate-pulse-slow" />
           <RoseIcon className="absolute -bottom-16 -right-24 h-32 w-32 text-accent/30 opacity-20 rotate-45 animate-pulse-slow" />
           <div className="mb-8 w-[200px] h-[200px] flex items-center justify-center">
-             <Image 
-              src={principalGif}
+             <img 
+              src={principalGif.src}
               alt="principal" 
               width={200} 
               height={200}
-              unoptimized
             />
           </div>
           <h1
@@ -149,6 +162,22 @@ export function LetterOpener({
             {buttonText}
           </Button>
         </div>
+      </div>
+    );
+  }
+
+  if (step === 'playingVideo') {
+    return (
+      <div className="fixed inset-0 bg-black flex items-center justify-center">
+        <video
+          ref={videoRef}
+          src={transicionVideo.src}
+          className="max-w-full max-h-full"
+          onEnded={handleVideoEnd}
+          muted
+          playsInline
+          onError={() => setStep('specialMessage')} // Fallback if video fails to load
+        />
       </div>
     );
   }
