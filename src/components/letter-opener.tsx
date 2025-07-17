@@ -172,7 +172,7 @@ export function LetterOpener({
 
   if (step === 'initial') {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen p-4 overflow-hidden relative">
+      <div className="flex flex-col items-center justify-center min-h-screen p-4 overflow-hidden relative bg-background">
          {isMounted && <Fireworks />}
          <div className="absolute inset-0 z-0">
           {petals.map((p) => (
@@ -219,7 +219,7 @@ export function LetterOpener({
             <Heart className="w-12 h-12 text-primary absolute -top-16 left-1/2 -translate-x-1/2 animate-pulse" style={{ animationDelay: '0.2s' }} />
             <Heart className="w-8 h-8 text-primary/70 absolute top-8 -left-20 animate-pulse" style={{ animationDelay: '0.4s' }} />
             <Heart className="w-8 h-8 text-primary/70 absolute bottom-8 -right-20 animate-pulse" style={{ animationDelay: '0.6s' }} />
-            <h1 className="text-5xl md:text-7xl text-primary-foreground animate-fade-in-up font-bold font-cormorant" style={{animation: 'fade-in-up 1s ease-out forwards, pulse-slow 2s infinite 1s'}}>
+            <h1 className="text-5xl md:text-7xl text-primary-foreground font-bold font-cormorant" style={{animation: 'fade-in-up 1s ease-out forwards, pulse-slow 2s infinite 1s'}}>
                 PARA MI PERSONA ESPECIAL
             </h1>
         </div>
