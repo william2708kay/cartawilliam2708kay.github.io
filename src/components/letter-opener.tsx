@@ -34,7 +34,7 @@ const Petal = ({
 const AnimatedParagraph = ({ text, delay, duration }: { text: string; delay: number; duration: number }) => {
     return (
       <p
-        className="mb-6 last:mb-0 animate-typing opacity-0"
+        className="mb-6 last:mb-0 animate-fade-in-up opacity-0"
         style={{
           animationDelay: `${delay}s`,
           animationDuration: `${duration}s`,
@@ -158,11 +158,11 @@ export function LetterOpener({
     let cumulativeDelay = 0.5; // Initial delay of 0.5s before the first paragraph
 
     return paragraphs.map((paragraph, index) => {
-      const duration = Math.max(0.5, paragraph.length / 40); // Faster typing speed
+      const duration = 0.8; // Each paragraph fades in over 0.8s
       const currentDelay = cumulativeDelay;
 
-      // The next paragraph will start after this one finishes + a 0.3s pause
-      cumulativeDelay += duration + 0.3; 
+      // The next paragraph will start after a 0.4s pause
+      cumulativeDelay += 0.4; 
 
       return (
         <AnimatedParagraph

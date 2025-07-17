@@ -11,7 +11,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'great-vibes': ["'Great Vibes'", ...fontFamily.serif],
+        'cormorant': ['var(--font-cormorant)', ...fontFamily.serif],
+        'great-vibes': ['var(--font-great-vibes)', ...fontFamily.serif],
       },
       colors: {
         background: 'hsl(var(--background))',
@@ -82,14 +83,6 @@ export default {
             'from': { opacity: '0', transform: 'translateY(20px)' },
             'to': { opacity: '1', transform: 'translateY(0)' },
         },
-        'typing': {
-          'from': { width: '0' },
-          'to': { width: '100%' },
-        },
-        'blink-caret': {
-          'from, to': { borderColor: 'transparent' },
-          '50%': { borderColor: 'hsl(var(--primary-foreground))' },
-        }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
@@ -97,7 +90,6 @@ export default {
         'fade-in': 'fade-in 1.5s ease-out forwards',
         'zoom-in': 'zoom-in 1s ease-out forwards',
         'fade-in-up': 'fade-in-up 1s ease-out forwards',
-        'typing': 'typing 2.5s steps(30, end) forwards, blink-caret .75s step-end infinite',
       },
     },
   },
