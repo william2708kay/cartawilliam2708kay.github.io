@@ -32,30 +32,13 @@ const Petal = ({
 );
 
 const AnimatedParagraph = ({ text, delay, duration }: { text: string; delay: number; duration: number }) => {
-    const [isVisible, setIsVisible] = useState(false);
-    const hasMounted = useRef(false);
-  
-    useEffect(() => {
-      hasMounted.current = true;
-      const timer = setTimeout(() => {
-        if (hasMounted.current) {
-          setIsVisible(true);
-        }
-      }, delay);
-      return () => {
-        hasMounted.current = false;
-        clearTimeout(timer);
-      };
-    }, [delay]);
-  
     return (
       <p
-        className={cn(
-          "mb-6 last:mb-0",
-          isVisible ? "animate-typing" : "opacity-0"
-        )}
+        className="mb-6 last:mb-0 animate-typing opacity-0"
         style={{
+          animationDelay: `${delay}s`,
           animationDuration: `${duration}s`,
+          animationFillMode: 'forwards',
         }}
       >
         {text ? text : <br />}
@@ -172,11 +155,15 @@ export function LetterOpener({
   
   const formattedLetter = useMemo(() => {
     const paragraphs = letter.split('\n');
-    let totalDelay = 500; // Initial delay before the first paragraph starts
+    let cumulativeDelay = 0.5; // Initial delay of 0.5s before the first paragraph
+
     return paragraphs.map((paragraph, index) => {
-      const duration = Math.max(0.5, paragraph.length / 40); 
-      const currentDelay = totalDelay;
-      totalDelay += (duration * 1000) + 300; // Add 300ms pause between paragraphs
+      const duration = Math.max(0.5, paragraph.length / 40); // Faster typing speed
+      const currentDelay = cumulativeDelay;
+
+      // The next paragraph will start after this one finishes + a 0.3s pause
+      cumulativeDelay += duration + 0.3; 
+
       return (
         <AnimatedParagraph
           key={index}

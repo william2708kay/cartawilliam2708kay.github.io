@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: 270 50% 96%; /* Soft Lavender */
+    --background: 340 60% 96%; /* Pale Pink */
     --foreground: 270 20% 25%; /* Dark Purple */
 
     --card: 270 50% 98%;
@@ -120,9 +120,11 @@
 @keyframes typing {
   from {
     width: 0;
+    opacity: 1;
   }
   to {
     width: 100%;
+    opacity: 1;
   }
 }
 
@@ -140,9 +142,9 @@
   overflow: hidden;
   white-space: nowrap;
   border-right: 0.15em solid hsl(var(--primary));
-  animation:
-    typing 2.5s steps(40, end) forwards,
-    blink-caret 0.75s step-end infinite;
+  animation-name: typing, blink-caret;
+  animation-timing-function: steps(40, end), step-end;
+  animation-iteration-count: 1, infinite;
 }
 
 @keyframes pulse-slow {
