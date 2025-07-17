@@ -9,6 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Heart } from "lucide-react";
 import { Fireworks } from "./fireworks";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 const Petal = ({
   style,
@@ -30,31 +31,38 @@ const Petal = ({
   </div>
 );
 
-const AnimatedParagraph = ({ text, delay }: { text: string; delay: number }) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const hasMounted = useRef(false);
-
-  useEffect(() => {
-    hasMounted.current = true;
-    const timer = setTimeout(() => {
-       if (hasMounted.current) {
-        setIsVisible(true)
-       }
-    }, delay);
-    return () => {
+const AnimatedParagraph = ({ text, delay, duration }: { text: string; delay: number; duration: number }) => {
+    const [isVisible, setIsVisible] = useState(false);
+    const hasMounted = useRef(false);
+  
+    useEffect(() => {
+      hasMounted.current = true;
+      const timer = setTimeout(() => {
+        if (hasMounted.current) {
+          setIsVisible(true);
+        }
+      }, delay);
+      return () => {
         hasMounted.current = false;
         clearTimeout(timer);
-    }
-  }, [delay]);
-
-  return (
-    <p
-      className={`mb-6 last:mb-0 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
-    >
-      {text ? text : <br />}
-    </p>
-  );
-};
+      };
+    }, [delay]);
+  
+    return (
+      <p
+        className={cn(
+          "mb-6 last:mb-0",
+          isVisible ? "animate-typing" : "opacity-0"
+        )}
+        style={{
+          animationDuration: `${duration}s`,
+          animationDelay: `${delay / 1000}s`,
+        }}
+      >
+        {text ? text : <br />}
+      </p>
+    );
+  };
 
 export function LetterOpener({
   letter,
@@ -164,9 +172,21 @@ export function LetterOpener({
   };
   
   const formattedLetter = useMemo(() => {
-    return letter.split('\n').map((paragraph, index) => (
-      <AnimatedParagraph key={index} text={paragraph} delay={index * 1000 + 500} />
-    ));
+    const paragraphs = letter.split('\n');
+    let totalDelay = 500;
+    return paragraphs.map((paragraph, index) => {
+      const duration = Math.max(1, paragraph.length / 20); // Adjust speed based on length
+      const currentDelay = totalDelay;
+      totalDelay += (duration * 1000) + 300; // Add pause between paragraphs
+      return (
+        <AnimatedParagraph
+          key={index}
+          text={paragraph}
+          delay={currentDelay}
+          duration={duration}
+        />
+      );
+    });
   }, [letter]);
 
 
@@ -272,14 +292,14 @@ export function LetterOpener({
                 <Image
                   src="/dentrolacarta.jpeg"
                   alt="Recuerdo especial"
-                  width={400}
-                  height={400}
-                  className="rounded-lg shadow-lg"
+                  width={250}
+                  height={250}
+                  className="rounded-lg shadow-lg border-4 border-primary/50 p-1"
                   data-ai-hint="romantic couple"
                   unoptimized={true}
                 />
               </div>
-              <div className="text-2xl leading-loose text-card-foreground font-great-vibes">
+              <div className="text-2xl leading-relaxed text-card-foreground font-great-vibes">
                 {formattedLetter}
               </div>
             </CardContent>
