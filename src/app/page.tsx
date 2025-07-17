@@ -1,16 +1,16 @@
 
 import { LetterOpener } from '@/components/letter-opener';
 
-const letterContent = `Mi querida Daiana,
+const letterContent = `Hola, Dais, ¿cómo estás? Estuve preparando esto en mis tiempos libres. Originalmente era para tu cumple, no se si hoy sera el ultimo dia contigo prepare todo esto... En fin, ya que trabajo en esto, qué mejor forma de transformar mi trabajo en algo especial para ti. Te dejé algo al final, pero tendrás que esperar.
 
-Hola, Dais, ¿cómo estás? Estuve preparando esto en mis tiempos libres. Originalmente era para tu cumple, pero supongo que hoy es el final... En fin, ya que trabajo en esto, qué mejor forma de transformar mi trabajo en algo especial para ti. Te dejé algo al final, pero tendrás que esperar.
+Gracias por acompañarme en cada salida Me encanta el cine y empeze a disfrutarlo mas contigo  nada nose como sera si no voy contigo, me encanta cuando me haces caricias me encantan tus besos me encanta cuando me dices te amo me encantas tu!! tu mirada tus manitas tu piesitos uff
 
-Gracias por acompañarme hoy a ver Superman. Es mi superhéroe favorito, junto con Spiderman, y aunque todavía no he visto la película a la hora que escribo esto, sé que estará genial. Me encanta el cine, pero lo más bonito de ir es tener tu compañía; la disfruto muchísimo.
+Cada momento contigo, por simple que sea, ha sido un regalo.  atesoro cada instante que pasamos juntos. siempre quedre todo lo mejor para ti quiero que estudies seas una gran persona la mejor y se que lo lograras ocnfio en ti , señorita nose. Y se que te  hice sentir mal y cometí un errores , te pido perdón de todo corazón.
 
-Cada momento contigo, por simple que sea, ha sido un regalo. A veces se gana o se pierde, y aunque no quería que esto terminara así, atesoro cada instante que pasamos juntos. Te deseo todo lo mejor, señorita encantadora. Y si alguna vez te hice sentir mal o cometí un error, te pido perdón de todo corazón.
+no soy perfecto pero siempre quiero ser mejor para ti y solo para ti por eres tu con quien quiero quedarme hasta mi ultimo respiro <3
 
-Atentamente,
-William`;
+firma
+Will`;
 
 export default function Home() {
   return (

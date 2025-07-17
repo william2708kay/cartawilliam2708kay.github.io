@@ -11,7 +11,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        cormorant: ["'Cormorant Garamond'", ...fontFamily.serif],
+        'great-vibes': ["'Great Vibes'", ...fontFamily.serif],
       },
       colors: {
         background: 'hsl(var(--background))',

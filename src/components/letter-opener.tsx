@@ -32,10 +32,19 @@ const Petal = ({
 
 const AnimatedParagraph = ({ text, delay }: { text: string; delay: number }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const hasMounted = useRef(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), delay);
-    return () => clearTimeout(timer);
+    hasMounted.current = true;
+    const timer = setTimeout(() => {
+       if (hasMounted.current) {
+        setIsVisible(true)
+       }
+    }, delay);
+    return () => {
+        hasMounted.current = false;
+        clearTimeout(timer);
+    }
   }, [delay]);
 
   return (
@@ -71,30 +80,36 @@ export function LetterOpener({
 
   useEffect(() => {
     setUniqueGifSrc(`/principal.gif?_t=${new Date().getTime()}`);
-    
-    const newPetals = Array.from({ length: 30 }).map((_, i) => {
-        let icon;
-        const rand = Math.random();
-        if (rand < 0.33) {
-          icon = <LilyIcon className="w-6 h-6" />;
-        } else if (rand < 0.66) {
-          icon = <TulipIcon className="w-6 h-6" />;
-        } else {
-          icon = <RoseIcon className="w-6 h-6" />;
-        }
+  }, []);
 
-        return {
-          id: i,
-          style: {
-            left: `${Math.random() * 100}vw`,
-            animationDuration: `${Math.random() * 8 + 7}s`,
-            animationDelay: `${Math.random() * 10}s`,
-            transform: `scale(${Math.random() * 0.5 + 0.6})`,
-          },
-          icon: icon,
-        };
-      });
-      setPetals(newPetals);
+  useEffect(() => {
+    const generatePetals = () => {
+      const newPetals = Array.from({ length: 30 }).map((_, i) => {
+          let icon;
+          const rand = Math.random();
+          if (rand < 0.33) {
+            icon = <LilyIcon className="w-6 h-6" />;
+          } else if (rand < 0.66) {
+            icon = <TulipIcon className="w-6 h-6" />;
+          } else {
+            icon = <RoseIcon className="w-6 h-6" />;
+          }
+
+          return {
+            id: i,
+            style: {
+              left: `${Math.random() * 100}vw`,
+              animationDuration: `${Math.random() * 8 + 7}s`,
+              animationDelay: `${Math.random() * 10}s`,
+              transform: `scale(${Math.random() * 0.5 + 0.6})`,
+            },
+            icon: icon,
+          };
+        });
+        setPetals(newPetals);
+    };
+
+    generatePetals();
 
     const unlockDate = new Date('2025-07-19T00:00:00');
     const checkDate = () => {
@@ -175,7 +190,7 @@ export function LetterOpener({
             )}
           </div>
           <h1
-            className="text-6xl md:text-8xl text-primary-foreground mb-12 animate-zoom-in font-cormorant"
+            className="text-6xl md:text-8xl text-primary-foreground mb-12 animate-zoom-in"
              style={{ animationDelay: '0.5s' }}
           >
             {openingText}
@@ -183,7 +198,7 @@ export function LetterOpener({
           <Button
             onClick={handleOpenClick}
             size="lg"
-            className="animate-zoom-in shadow-lg text-lg px-10 py-8 rounded-full animate-pulse-slow font-cormorant"
+            className="animate-zoom-in shadow-lg text-lg px-10 py-8 rounded-full animate-pulse-slow"
             style={{ animationDelay: "1s" }}
           >
             {buttonText}
@@ -200,7 +215,7 @@ export function LetterOpener({
             <Heart className="w-12 h-12 text-primary absolute -top-16 left-1/2 -translate-x-1/2 animate-pulse" style={{ animationDelay: '0.2s' }} />
             <Heart className="w-8 h-8 text-primary/70 absolute top-8 -left-20 animate-pulse" style={{ animationDelay: '0.4s' }} />
             <Heart className="w-8 h-8 text-primary/70 absolute bottom-8 -right-20 animate-pulse" style={{ animationDelay: '0.6s' }} />
-            <h1 className="text-5xl md:text-7xl text-primary-foreground animate-fade-in-up font-bold font-cormorant" style={{animation: 'fade-in-up 1s ease-out forwards, pulse-slow 2s infinite 1s'}}>
+            <h1 className="text-5xl md:text-7xl text-primary-foreground animate-fade-in-up font-bold" style={{animation: 'fade-in-up 1s ease-out forwards, pulse-slow 2s infinite 1s'}}>
                 PARA MI PERSONA ESPECIAL
             </h1>
         </div>
@@ -211,7 +226,7 @@ export function LetterOpener({
   if (step === 'finalSurprise') {
     return (
       <div 
-        className="flex items-center justify-center min-h-screen bg-cover bg-center bg-no-repeat bg-fixed"
+        className="flex items-center justify-center min-h-screen bg-cover bg-center bg-no-repeat bg-fixed font-great-vibes"
         style={{ backgroundImage: "url('/para-la-carta.jpeg')" }}
         data-ai-hint="romantic letter background"
       >
@@ -220,7 +235,7 @@ export function LetterOpener({
           <source src="/music.mp3" type="audio/mpeg" />
           Tu navegador no soporta el elemento de audio.
         </audio>
-        <div className="relative text-center p-6 md:p-8 z-10 bg-white/20 backdrop-blur-sm rounded-2xl shadow-lg font-cormorant">
+        <div className="relative text-center p-6 md:p-8 z-10 bg-white/20 backdrop-blur-sm rounded-2xl shadow-lg">
           <Heart className="w-24 h-24 text-red-500 mx-auto mb-8 animate-pulse" />
           <h1 className="text-4xl md:text-6xl text-gray-800 animate-fade-in-up font-bold">
             Feliz Cumpleaños Daiana
@@ -248,7 +263,7 @@ export function LetterOpener({
         </div>
   
         <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-4 sm:p-8">
-          <Card className="w-full max-w-2xl bg-card/80 backdrop-blur-sm animate-zoom-in shadow-2xl border-4 border-primary/30 rounded-2xl font-cormorant">
+          <Card className="w-full max-w-2xl bg-card/80 backdrop-blur-sm animate-zoom-in shadow-2xl border-4 border-primary/30 rounded-2xl">
             <CardContent className="p-8 sm:p-12">
                <div className="mb-8 flex justify-center">
                 <Image
@@ -261,12 +276,12 @@ export function LetterOpener({
                   unoptimized={true}
                 />
               </div>
-              <div className="text-xl leading-loose text-card-foreground">
+              <div className="text-2xl leading-loose text-card-foreground font-great-vibes">
                 {formattedLetter}
               </div>
             </CardContent>
           </Card>
-          <div className="mt-8 animate-fade-in-up font-cormorant" style={{ animationDelay: '1s' }}>
+          <div className="mt-8 animate-fade-in-up" style={{ animationDelay: '1s' }}>
             <Button
               onClick={handleFinalButtonClick}
               size="lg"
