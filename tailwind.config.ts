@@ -10,9 +10,6 @@ export default {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        dancing: ["var(--font-dancing-script)", ...fontFamily.sans],
-      },
       colors: {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',

@@ -177,7 +177,7 @@ export function LetterOpener({
             )}
           </div>
           <h1
-            className="text-6xl md:text-8xl text-primary-foreground mb-12 overflow-hidden whitespace-nowrap border-r-4 border-r-transparent animate-typing font-dancing"
+            className="text-6xl md:text-8xl text-primary-foreground mb-12 overflow-hidden whitespace-nowrap border-r-4 border-r-transparent animate-typing"
             style={{ animation: 'typing 2.5s steps(30, end), blink-caret .75s step-end infinite' }}
           >
             {openingText}
@@ -202,7 +202,7 @@ export function LetterOpener({
             <Heart className="w-12 h-12 text-primary absolute -top-16 left-1/2 -translate-x-1/2 animate-pulse" style={{ animationDelay: '0.2s' }} />
             <Heart className="w-8 h-8 text-primary/70 absolute top-8 -left-20 animate-pulse" style={{ animationDelay: '0.4s' }} />
             <Heart className="w-8 h-8 text-primary/70 absolute bottom-8 -right-20 animate-pulse" style={{ animationDelay: '0.6s' }} />
-            <h1 className="text-5xl md:text-7xl text-primary-foreground animate-fade-in-up font-dancing">
+            <h1 className="text-5xl md:text-7xl text-primary-foreground animate-fade-in-up">
             PARA MI PERSONA ESPECIAL
             </h1>
         </div>
@@ -224,10 +224,10 @@ export function LetterOpener({
         </audio>
         <div className="relative text-center p-6 md:p-8 z-10 bg-white/20 backdrop-blur-sm rounded-2xl shadow-lg">
           <Heart className="w-24 h-24 text-red-500 mx-auto mb-8 animate-pulse" />
-          <h1 className="text-4xl md:text-6xl text-gray-800 animate-fade-in-up font-dancing">
+          <h1 className="text-4xl md:text-6xl text-gray-800 animate-fade-in-up">
             Feliz Cumpleaños Daiana
           </h1>
-          <div className="mt-6 text-2xl md:text-3xl text-gray-700/90 animate-fade-in-up space-y-4 font-dancing" style={{ animationDelay: "0.5s" }}>
+          <div className="mt-6 text-2xl md:text-3xl text-gray-700/90 animate-fade-in-up space-y-4" style={{ animationDelay: "0.5s" }}>
             <p>Sé que ya no estoy ahí para ti pero me hubiera encantado llevarte a mis lugares preferidos, comer hasta engordar, concentirte como una niña tenerte de la mano... en fin, no quiero estar sentimental ni nada, pero que este día esté lleno de alegría y amor.</p>
             <p>Te quiero mucho y te extraño.</p>
             <p>Espero que tus metas se cumplan y éxitos en todo, señorita. Créeme que siempre te tendré en mi mente como un lindo recuerdo.</p>
@@ -263,7 +263,7 @@ export function LetterOpener({
                   unoptimized
                 />
               </div>
-              <div className="text-3xl md:text-4xl leading-loose text-card-foreground font-dancing">
+              <div className="text-lg leading-loose text-card-foreground">
                 {formattedLetter}
               </div>
             </CardContent>
@@ -280,7 +280,7 @@ export function LetterOpener({
               {isFinalButtonEnabled ? 'Abrir Sorpresa Final' : 'Una sorpresa para el futuro'}
             </Button>
             {!isFinalButtonEnabled && (
-              <p className="text-center mt-4 text-sm text-card-foreground/70 font-dancing">
+              <p className="text-center mt-4 text-sm text-card-foreground/70">
                 Se desbloqueará el 19 de Julio de 2025
               </p>
             )}
