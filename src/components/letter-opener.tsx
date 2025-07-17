@@ -280,7 +280,7 @@ export function LetterOpener({
               {isFinalButtonEnabled ? 'Abrir Sorpresa Final' : 'Una sorpresa para el futuro'}
             </Button>
             {!isFinalButtonEnabled && (
-              <p className="text-center mt-4 text-sm text-card-foreground/70">
+              <p className="text-center mt-4 text-sm text-card-foreground/70 font-dancing">
                 Se desbloqueará el 19 de Julio de 2025
               </p>
             )}
