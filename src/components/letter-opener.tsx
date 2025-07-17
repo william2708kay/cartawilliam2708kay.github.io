@@ -67,7 +67,7 @@ export function LetterOpener({
   const audioRef = useRef<HTMLAudioElement>(null);
   const { toast } = useToast();
   const [isFinalButtonEnabled, setIsFinalButtonEnabled] = useState(false);
-  const [uniqueGifSrc, setUniqueGifSrc] = useState('');
+  const [uniqueGifSrc, setUniqueGifSrc] = useState<string | null>(null);
 
   useEffect(() => {
     setUniqueGifSrc(`/principal.gif?_t=${new Date().getTime()}`);
@@ -163,13 +163,15 @@ export function LetterOpener({
         </div>
         <div className="relative text-center flex flex-col items-center z-10">
           <div className="mb-8 w-[200px] h-[200px] flex items-center justify-center animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-             <img 
-              src={uniqueGifSrc}
-              alt="principal" 
-              width={200} 
-              height={200}
-              className="rounded-full shadow-2xl"
-            />
+             {uniqueGifSrc && (
+              <img 
+                src={uniqueGifSrc}
+                alt="principal" 
+                width={200} 
+                height={200}
+                className="rounded-full shadow-2xl"
+              />
+            )}
           </div>
           <h1
             className="text-6xl md:text-8xl text-primary-foreground mb-12 overflow-hidden whitespace-nowrap border-r-4 border-r-transparent animate-typing"
