@@ -77,12 +77,25 @@ export function LetterOpener({
   const { toast } = useToast();
   const [isFinalButtonEnabled, setIsFinalButtonEnabled] = useState(false);
   const [uniqueGifSrc, setUniqueGifSrc] = useState<string | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
     setUniqueGifSrc(`/principal.gif?_t=${new Date().getTime()}`);
+    
+    const unlockDate = new Date('2025-07-19T00:00:00');
+    const checkDate = () => {
+        const now = new Date();
+        setIsFinalButtonEnabled(now >= unlockDate);
+    };
+    checkDate();
+    const interval = setInterval(checkDate, 60000); // Check every minute
+    return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
+    if (!isMounted) return;
+
     const generatePetals = () => {
       const newPetals = Array.from({ length: 30 }).map((_, i) => {
           let icon;
@@ -110,16 +123,7 @@ export function LetterOpener({
     };
 
     generatePetals();
-
-    const unlockDate = new Date('2025-07-19T00:00:00');
-    const checkDate = () => {
-        const now = new Date();
-        setIsFinalButtonEnabled(now >= unlockDate);
-    };
-    checkDate();
-    const interval = setInterval(checkDate, 60000); // Check every minute
-    return () => clearInterval(interval);
-  }, []);
+  }, [isMounted]);
 
   const handleFinalButtonClick = () => {
     if (isFinalButtonEnabled) {
@@ -169,7 +173,7 @@ export function LetterOpener({
   if (step === 'initial') {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen p-4 overflow-hidden relative">
-         <Fireworks />
+         {isMounted && <Fireworks />}
          <div className="absolute inset-0 z-0">
           {petals.map((p) => (
             <Petal key={p.id} style={p.style}>
@@ -215,7 +219,7 @@ export function LetterOpener({
             <Heart className="w-12 h-12 text-primary absolute -top-16 left-1/2 -translate-x-1/2 animate-pulse" style={{ animationDelay: '0.2s' }} />
             <Heart className="w-8 h-8 text-primary/70 absolute top-8 -left-20 animate-pulse" style={{ animationDelay: '0.4s' }} />
             <Heart className="w-8 h-8 text-primary/70 absolute bottom-8 -right-20 animate-pulse" style={{ animationDelay: '0.6s' }} />
-            <h1 className="text-5xl md:text-7xl text-primary-foreground animate-fade-in-up font-bold font-great-vibes" style={{animation: 'fade-in-up 1s ease-out forwards, pulse-slow 2s infinite 1s'}}>
+            <h1 className="text-5xl md:text-7xl text-primary-foreground animate-fade-in-up font-bold font-cormorant" style={{animation: 'fade-in-up 1s ease-out forwards, pulse-slow 2s infinite 1s'}}>
                 PARA MI PERSONA ESPECIAL
             </h1>
         </div>
@@ -230,7 +234,7 @@ export function LetterOpener({
         style={{ backgroundImage: "url('/para-la-carta.jpeg')" }}
         data-ai-hint="romantic letter background"
       >
-        <Fireworks />
+        {isMounted && <Fireworks />}
         <audio ref={audioRef} loop hidden>
           <source src="/music.mp3" type="audio/mpeg" />
           Tu navegador no soporta el elemento de audio.
@@ -240,11 +244,10 @@ export function LetterOpener({
           <h1 className="text-4xl md:text-6xl text-gray-800 animate-fade-in-up font-bold">
             Feliz Cumpleaños Daiana
           </h1>
-          <div className="mt-6 text-2xl md:text-3xl text-gray-700/90 animate-fade-in-up space-y-4" style={{ animationDelay: "0.5s" }}>
-            <p>bueno esto lo escribi antes de todo lo que pase el jueves y no se si soy tu novio o no jsjsadhj pero si en el caso lo eres felicidades mi vidaa te amoooo muchoo muchoo ,que este día esté lleno de alegría y amor con las personas que mas quieres.</p>
-            <p>Te quiero mucho y te extraño.</p>
-            <p>Espero que tus metas se cumplan y éxitos en todo, señorita.siempre estaras en mi mente y corazon Te quiero mucho y te extraño.</p>
-            <p className="mt-8 font-bold">- Con mucho amor, William</p>
+          <div className="mt-6 text-2xl md:text-3xl text-gray-700/90 space-y-4">
+            <p className="animate-fade-in-up" style={{ animationDelay: "0.5s" }}>bueno esto lo escribi antes de todo lo que pase el jueves y no se si soy tu novio o no jsjsadhj pero si en el caso lo eres felicidades mi vidaa te amoooo muchoo muchoo ,que este día esté lleno de alegría y amor con las personas que mas quieres.</p>
+            <p className="animate-fade-in-up" style={{ animationDelay: "1.0s" }}>Espero que tus metas se cumplan y éxitos en todo, señorita.siempre estaras en mi mente y corazon Te quiero mucho y te extraño.</p>
+            <p className="mt-8 font-bold animate-fade-in-up" style={{ animationDelay: "1.5s" }}>- Con mucho amor, William</p>
           </div>
         </div>
       </div>
@@ -293,7 +296,7 @@ export function LetterOpener({
               {isFinalButtonEnabled ? 'Abrir Sorpresa Final' : 'Una sorpresa para el futuro'}
             </Button>
             {!isFinalButtonEnabled && (
-              <p className="text-center mt-4 text-sm text-card-foreground/70">
+              <p className="text-center mt-4 text-sm text-card-foreground/70 font-cormorant">
                 Se desbloqueará el 19 de Julio de 2025
               </p>
             )}
