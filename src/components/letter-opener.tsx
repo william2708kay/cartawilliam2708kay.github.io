@@ -175,7 +175,7 @@ export function LetterOpener({
     const paragraphs = letter.split('\n');
     let totalDelay = 500;
     return paragraphs.map((paragraph, index) => {
-      const duration = Math.max(1, paragraph.length / 20); // Adjust speed based on length
+      const duration = Math.max(0.5, paragraph.length / 40); // Adjust speed based on length
       const currentDelay = totalDelay;
       totalDelay += (duration * 1000) + 300; // Add pause between paragraphs
       return (
