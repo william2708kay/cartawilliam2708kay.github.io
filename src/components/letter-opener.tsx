@@ -56,7 +56,6 @@ const AnimatedParagraph = ({ text, delay, duration }: { text: string; delay: num
         )}
         style={{
           animationDuration: `${duration}s`,
-          animationDelay: `${delay / 1000}s`,
         }}
       >
         {text ? text : <br />}
@@ -173,11 +172,11 @@ export function LetterOpener({
   
   const formattedLetter = useMemo(() => {
     const paragraphs = letter.split('\n');
-    let totalDelay = 500;
+    let totalDelay = 500; // Initial delay before the first paragraph starts
     return paragraphs.map((paragraph, index) => {
-      const duration = Math.max(0.5, paragraph.length / 40); // Adjust speed based on length
+      const duration = Math.max(0.5, paragraph.length / 40); 
       const currentDelay = totalDelay;
-      totalDelay += (duration * 1000) + 300; // Add pause between paragraphs
+      totalDelay += (duration * 1000) + 300; // Add 300ms pause between paragraphs
       return (
         <AnimatedParagraph
           key={index}
@@ -254,7 +253,7 @@ export function LetterOpener({
         style={{ backgroundImage: "url('/para-la-carta.jpeg')" }}
         data-ai-hint="romantic letter background"
       >
-        {isMounted && <Fireworks />}
+        <Fireworks />
         <audio ref={audioRef} loop hidden>
           <source src="/music.mp3" type="audio/mpeg" />
           Tu navegador no soporta el elemento de audio.
