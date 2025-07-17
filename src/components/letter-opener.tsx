@@ -166,17 +166,18 @@ export function LetterOpener({
         <div className="relative text-center flex flex-col items-center">
           <LilyIcon className="absolute -top-16 -left-24 h-32 w-32 text-primary/30 opacity-20 -rotate-45 animate-pulse-slow" />
           <RoseIcon className="absolute -bottom-16 -right-24 h-32 w-32 text-accent/30 opacity-20 rotate-45 animate-pulse-slow" />
-          <div className="mb-8 w-[200px] h-[200px] flex items-center justify-center">
+          <div className="mb-8 w-[200px] h-[200px] flex items-center justify-center animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
              <img 
               src="/principal.gif"
               alt="principal" 
               width={200} 
               height={200}
+              className="rounded-full shadow-2xl"
             />
           </div>
           <h1
-            className="text-6xl md:text-8xl font-headline mb-12 animate-fade-in-up"
-            style={{ animationDelay: "0.2s" }}
+            className="text-6xl md:text-8xl font-headline mb-12 overflow-hidden whitespace-nowrap border-r-4 border-r-transparent animate-typing"
+            style={{ animation: 'typing 2.5s steps(30, end), blink-caret .75s step-end infinite' }}
           >
             {openingText}
           </h1>
@@ -184,7 +185,7 @@ export function LetterOpener({
             onClick={handleOpenClick}
             size="lg"
             className="animate-fade-in-up shadow-lg text-lg px-10 py-8 rounded-full animate-pulse"
-            style={{ animationDelay: "0.6s" }}
+            style={{ animationDelay: "2.8s" }}
           >
             {buttonText}
           </Button>
