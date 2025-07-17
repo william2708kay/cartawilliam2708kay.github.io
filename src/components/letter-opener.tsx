@@ -167,12 +167,11 @@ export function LetterOpener({
           <LilyIcon className="absolute -top-16 -left-24 h-32 w-32 text-primary/30 opacity-20 -rotate-45 animate-pulse-slow" />
           <RoseIcon className="absolute -bottom-16 -right-24 h-32 w-32 text-accent/30 opacity-20 rotate-45 animate-pulse-slow" />
           <div className="mb-8 w-[200px] h-[200px] flex items-center justify-center">
-             <Image 
+             <img 
               src="/principal.gif"
               alt="principal" 
               width={200} 
               height={200}
-              unoptimized
             />
           </div>
           <h1
