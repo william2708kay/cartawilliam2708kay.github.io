@@ -171,7 +171,6 @@ export function LetterOpener({
                 width={200} 
                 height={200}
                 className="rounded-full"
-                unoptimized
               />
             )}
           </div>
@@ -259,7 +258,7 @@ export function LetterOpener({
                   height={400}
                   className="rounded-lg shadow-lg"
                   data-ai-hint="romantic couple"
-                  unoptimized
+                  unoptimized={true}
                 />
               </div>
               <div className="text-xl leading-loose text-card-foreground">
