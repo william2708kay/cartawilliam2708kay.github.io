@@ -71,7 +71,7 @@ export function LetterOpener({
 
   useEffect(() => {
     setUniqueGifSrc(`/principal.gif?_t=${new Date().getTime()}`);
-
+    
     const newPetals = Array.from({ length: 30 }).map((_, i) => {
       let icon;
       const rand = Math.random();
@@ -95,11 +95,17 @@ export function LetterOpener({
       };
     });
     setPetals(newPetals);
-
+  }, []);
+  
+  useEffect(() => {
     const unlockDate = new Date('2025-07-19T00:00:00');
-    const now = new Date();
-    setIsFinalButtonEnabled(now >= unlockDate);
-
+    const checkDate = () => {
+        const now = new Date();
+        setIsFinalButtonEnabled(now >= unlockDate);
+    };
+    checkDate();
+    const interval = setInterval(checkDate, 60000); // Check every minute
+    return () => clearInterval(interval);
   }, []);
 
   const handleFinalButtonClick = () => {
@@ -171,7 +177,7 @@ export function LetterOpener({
             )}
           </div>
           <h1
-            className="text-6xl md:text-8xl text-primary-foreground mb-12 overflow-hidden whitespace-nowrap border-r-4 border-r-transparent animate-typing"
+            className="text-6xl md:text-8xl text-primary-foreground mb-12 overflow-hidden whitespace-nowrap border-r-4 border-r-transparent animate-typing font-dancing"
             style={{ animation: 'typing 2.5s steps(30, end), blink-caret .75s step-end infinite' }}
           >
             {openingText}
@@ -196,7 +202,7 @@ export function LetterOpener({
             <Heart className="w-12 h-12 text-primary absolute -top-16 left-1/2 -translate-x-1/2 animate-pulse" style={{ animationDelay: '0.2s' }} />
             <Heart className="w-8 h-8 text-primary/70 absolute top-8 -left-20 animate-pulse" style={{ animationDelay: '0.4s' }} />
             <Heart className="w-8 h-8 text-primary/70 absolute bottom-8 -right-20 animate-pulse" style={{ animationDelay: '0.6s' }} />
-            <h1 className="text-5xl md:text-7xl text-primary-foreground animate-fade-in-up">
+            <h1 className="text-5xl md:text-7xl text-primary-foreground animate-fade-in-up font-dancing">
             PARA MI PERSONA ESPECIAL
             </h1>
         </div>
