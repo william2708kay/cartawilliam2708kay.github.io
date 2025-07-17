@@ -239,7 +239,7 @@ export function LetterOpener({
           <source src="/music.mp3" type="audio/mpeg" />
           Tu navegador no soporta el elemento de audio.
         </audio>
-        <div className="relative text-center p-6 md:p-8 z-10 bg-white/20 backdrop-blur-sm rounded-2xl shadow-lg">
+        <div className="relative text-center p-6 md:p-8 z-0 bg-white/20 backdrop-blur-sm rounded-2xl shadow-lg">
           <Heart className="w-24 h-24 text-red-500 mx-auto mb-8 animate-pulse" />
           <h1 className="text-4xl md:text-6xl text-gray-800 animate-fade-in-up font-bold">
             Feliz Cumpleaños Daiana
