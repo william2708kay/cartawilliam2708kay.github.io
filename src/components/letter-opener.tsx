@@ -8,6 +8,7 @@ import { LilyIcon, TulipIcon, RoseIcon } from "@/components/icons";
 import { useToast } from "@/hooks/use-toast";
 import { Heart } from "lucide-react";
 import { Fireworks } from "./fireworks";
+import { FallingHearts } from './falling-hearts';
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
@@ -241,6 +242,7 @@ export function LetterOpener({
         data-ai-hint="romantic letter background"
       >
         <Fireworks />
+        <FallingHearts />
         <audio ref={audioRef} loop hidden>
           <source src="/music.mp3" type="audio/mpeg" />
           Tu navegador no soporta el elemento de audio.
