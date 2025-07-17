@@ -9,11 +9,6 @@ export default {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        body: ['Literata', 'serif'],
-        headline: ['Literata', 'serif'],
-        code: ['monospace'],
-      },
       colors: {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
