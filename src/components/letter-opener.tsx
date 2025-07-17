@@ -218,10 +218,10 @@ export function LetterOpener({
         </audio>
         <div className="relative text-center p-6 md:p-8 z-10 bg-white/20 backdrop-blur-sm rounded-2xl shadow-lg">
           <Heart className="w-24 h-24 text-red-500 mx-auto mb-8 animate-pulse" />
-          <h1 className="text-4xl md:text-6xl text-gray-800 animate-fade-in-up">
+          <h1 className="text-4xl md:text-6xl text-gray-800 animate-fade-in-up font-dancing">
             Feliz Cumpleaños Daiana
           </h1>
-          <div className="mt-6 text-2xl md:text-3xl text-gray-700/90 animate-fade-in-up space-y-4" style={{ animationDelay: "0.5s" }}>
+          <div className="mt-6 text-2xl md:text-3xl text-gray-700/90 animate-fade-in-up space-y-4 font-dancing" style={{ animationDelay: "0.5s" }}>
             <p>Sé que ya no estoy ahí para ti pero me hubiera encantado llevarte a mis lugares preferidos, comer hasta engordar, concentirte como una niña tenerte de la mano... en fin, no quiero estar sentimental ni nada, pero que este día esté lleno de alegría y amor.</p>
             <p>Te quiero mucho y te extraño.</p>
             <p>Espero que tus metas se cumplan y éxitos en todo, señorita. Créeme que siempre te tendré en mi mente como un lindo recuerdo.</p>
@@ -257,7 +257,7 @@ export function LetterOpener({
                   unoptimized
                 />
               </div>
-              <div className="text-xl md:text-2xl leading-loose text-card-foreground">
+              <div className="text-3xl md:text-4xl leading-loose text-card-foreground font-dancing">
                 {formattedLetter}
               </div>
             </CardContent>
