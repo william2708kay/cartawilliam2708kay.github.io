@@ -190,7 +190,7 @@ export function LetterOpener({
             )}
           </div>
           <h1
-            className="text-6xl md:text-8xl text-primary-foreground mb-12 animate-zoom-in"
+            className="text-6xl md:text-8xl text-primary-foreground mb-12 animate-zoom-in font-great-vibes"
              style={{ animationDelay: '0.5s' }}
           >
             {openingText}
@@ -215,7 +215,7 @@ export function LetterOpener({
             <Heart className="w-12 h-12 text-primary absolute -top-16 left-1/2 -translate-x-1/2 animate-pulse" style={{ animationDelay: '0.2s' }} />
             <Heart className="w-8 h-8 text-primary/70 absolute top-8 -left-20 animate-pulse" style={{ animationDelay: '0.4s' }} />
             <Heart className="w-8 h-8 text-primary/70 absolute bottom-8 -right-20 animate-pulse" style={{ animationDelay: '0.6s' }} />
-            <h1 className="text-5xl md:text-7xl text-primary-foreground animate-fade-in-up font-bold" style={{animation: 'fade-in-up 1s ease-out forwards, pulse-slow 2s infinite 1s'}}>
+            <h1 className="text-5xl md:text-7xl text-primary-foreground animate-fade-in-up font-bold font-great-vibes" style={{animation: 'fade-in-up 1s ease-out forwards, pulse-slow 2s infinite 1s'}}>
                 PARA MI PERSONA ESPECIAL
             </h1>
         </div>
@@ -241,9 +241,9 @@ export function LetterOpener({
             Feliz Cumpleaños Daiana
           </h1>
           <div className="mt-6 text-2xl md:text-3xl text-gray-700/90 animate-fade-in-up space-y-4" style={{ animationDelay: "0.5s" }}>
-            <p>Sé que ya no estoy ahí para ti pero me hubiera encantado llevarte a mis lugares preferidos, comer hasta engordar, concentirte como una niña tenerte de la mano... en fin, no quiero estar sentimental ni nada, pero que este día esté lleno de alegría y amor.</p>
+            <p>bueno esto lo escribi antes de todo lo que pase el jueves y no se si soy tu novio o no jsjsadhj pero si en el caso lo eres felicidades mi vidaa te amoooo muchoo muchoo ,que este día esté lleno de alegría y amor con las personas que mas quieres.</p>
             <p>Te quiero mucho y te extraño.</p>
-            <p>Espero que tus metas se cumplan y éxitos en todo, señorita. Créeme que siempre te tendré en mi mente como un lindo recuerdo.</p>
+            <p>Espero que tus metas se cumplan y éxitos en todo, señorita.siempre estaras en mi mente y corazon Te quiero mucho y te extraño.</p>
             <p className="mt-8 font-bold">- Con mucho amor, William</p>
           </div>
         </div>
