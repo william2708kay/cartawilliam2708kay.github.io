@@ -68,34 +68,40 @@ export function LetterOpener({
   const { toast } = useToast();
   const [isFinalButtonEnabled, setIsFinalButtonEnabled] = useState(false);
   const [uniqueGifSrc, setUniqueGifSrc] = useState<string | null>(null);
+  const [showPetals, setShowPetals] = useState(false);
 
   useEffect(() => {
+    setShowPetals(true);
     setUniqueGifSrc(`/principal.gif?_t=${new Date().getTime()}`);
-    
-    const newPetals = Array.from({ length: 30 }).map((_, i) => {
-      let icon;
-      const rand = Math.random();
-      if (rand < 0.33) {
-        icon = <LilyIcon className="w-6 h-6" />;
-      } else if (rand < 0.66) {
-        icon = <TulipIcon className="w-6 h-6" />;
-      } else {
-        icon = <RoseIcon className="w-6 h-6" />;
-      }
-
-      return {
-        id: i,
-        style: {
-          left: `${Math.random() * 100}vw`,
-          animationDuration: `${Math.random() * 8 + 7}s`,
-          animationDelay: `${Math.random() * 10}s`,
-          transform: `scale(${Math.random() * 0.5 + 0.6})`,
-        },
-        icon: icon,
-      };
-    });
-    setPetals(newPetals);
   }, []);
+
+  useEffect(() => {
+    if (showPetals) {
+      const newPetals = Array.from({ length: 30 }).map((_, i) => {
+        let icon;
+        const rand = Math.random();
+        if (rand < 0.33) {
+          icon = <LilyIcon className="w-6 h-6" />;
+        } else if (rand < 0.66) {
+          icon = <TulipIcon className="w-6 h-6" />;
+        } else {
+          icon = <RoseIcon className="w-6 h-6" />;
+        }
+
+        return {
+          id: i,
+          style: {
+            left: `${Math.random() * 100}vw`,
+            animationDuration: `${Math.random() * 8 + 7}s`,
+            animationDelay: `${Math.random() * 10}s`,
+            transform: `scale(${Math.random() * 0.5 + 0.6})`,
+          },
+          icon: icon,
+        };
+      });
+      setPetals(newPetals);
+    }
+  }, [showPetals]);
   
   useEffect(() => {
     const unlockDate = new Date('2025-07-19T00:00:00');
@@ -165,7 +171,7 @@ export function LetterOpener({
           ))}
         </div>
         <div className="relative text-center flex flex-col items-center z-10">
-          <div className="mb-8 w-[200px] h-[200px] flex items-center justify-center animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+          <div className="mb-8 w-[200px] h-[200px] flex items-center justify-center animate-zoom-in" style={{ animationDelay: '0.2s' }}>
              {uniqueGifSrc && (
               <img 
                 src={uniqueGifSrc}
@@ -177,16 +183,16 @@ export function LetterOpener({
             )}
           </div>
           <h1
-            className="text-6xl md:text-8xl text-primary-foreground mb-12 overflow-hidden whitespace-nowrap border-r-4 border-r-transparent animate-typing"
-            style={{ animation: 'typing 2.5s steps(30, end), blink-caret .75s step-end infinite' }}
+            className="text-6xl md:text-8xl text-primary-foreground mb-12 animate-zoom-in"
+             style={{ animationDelay: '0.5s' }}
           >
             {openingText}
           </h1>
           <Button
             onClick={handleOpenClick}
             size="lg"
-            className="animate-fade-in-up shadow-lg text-lg px-10 py-8 rounded-full animate-pulse"
-            style={{ animationDelay: "2.8s" }}
+            className="animate-zoom-in shadow-lg text-lg px-10 py-8 rounded-full animate-pulse-slow"
+            style={{ animationDelay: "1s" }}
           >
             {buttonText}
           </Button>
@@ -202,7 +208,7 @@ export function LetterOpener({
             <Heart className="w-12 h-12 text-primary absolute -top-16 left-1/2 -translate-x-1/2 animate-pulse" style={{ animationDelay: '0.2s' }} />
             <Heart className="w-8 h-8 text-primary/70 absolute top-8 -left-20 animate-pulse" style={{ animationDelay: '0.4s' }} />
             <Heart className="w-8 h-8 text-primary/70 absolute bottom-8 -right-20 animate-pulse" style={{ animationDelay: '0.6s' }} />
-            <h1 className="text-5xl md:text-7xl text-primary-foreground animate-fade-in-up">
+            <h1 className="text-5xl md:text-7xl text-primary-foreground animate-fade-in-up font-bold">
             PARA MI PERSONA ESPECIAL
             </h1>
         </div>
@@ -224,7 +230,7 @@ export function LetterOpener({
         </audio>
         <div className="relative text-center p-6 md:p-8 z-10 bg-white/20 backdrop-blur-sm rounded-2xl shadow-lg">
           <Heart className="w-24 h-24 text-red-500 mx-auto mb-8 animate-pulse" />
-          <h1 className="text-4xl md:text-6xl text-gray-800 animate-fade-in-up">
+          <h1 className="text-4xl md:text-6xl text-gray-800 animate-fade-in-up font-bold">
             Feliz Cumpleaños Daiana
           </h1>
           <div className="mt-6 text-2xl md:text-3xl text-gray-700/90 animate-fade-in-up space-y-4" style={{ animationDelay: "0.5s" }}>
@@ -250,7 +256,7 @@ export function LetterOpener({
         </div>
   
         <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-4 sm:p-8">
-          <Card className="w-full max-w-2xl bg-card/80 backdrop-blur-sm animate-fade-in-up shadow-2xl border-4 border-primary/30 rounded-2xl">
+          <Card className="w-full max-w-2xl bg-card/80 backdrop-blur-sm animate-zoom-in shadow-2xl border-4 border-primary/30 rounded-2xl">
             <CardContent className="p-8 sm:p-12">
                <div className="mb-8 flex justify-center">
                 <Image
@@ -263,7 +269,7 @@ export function LetterOpener({
                   unoptimized
                 />
               </div>
-              <div className="text-lg leading-loose text-card-foreground">
+              <div className="text-xl leading-loose text-card-foreground">
                 {formattedLetter}
               </div>
             </CardContent>
@@ -272,7 +278,7 @@ export function LetterOpener({
             <Button
               onClick={handleFinalButtonClick}
               size="lg"
-              className={`shadow-lg text-lg px-10 py-8 rounded-full transition-all duration-300 ${
+              className={`shadow-lg text-lg px-10 py-8 rounded-full transition-all duration-300 font-bold ${
                 !isFinalButtonEnabled ? 'cursor-not-allowed opacity-60 bg-muted text-muted-foreground' : 'animate-pulse'
               }`}
             >
