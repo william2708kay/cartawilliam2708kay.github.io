@@ -71,6 +71,11 @@ export function LetterOpener({
   const audioRef = useRef<HTMLAudioElement>(null);
   const { toast } = useToast();
   const [isFinalButtonEnabled, setIsFinalButtonEnabled] = useState(false);
+  const [uniqueGifSrc, setUniqueGifSrc] = useState('/principal.gif');
+
+  useEffect(() => {
+    setUniqueGifSrc(`/principal.gif?_t=${new Date().getTime()}`);
+  }, []);
 
   const handleFinalButtonClick = () => {
     if (isFinalButtonEnabled) {
@@ -168,7 +173,7 @@ export function LetterOpener({
           <RoseIcon className="absolute -bottom-16 -right-24 h-32 w-32 text-accent/30 opacity-20 rotate-45 animate-pulse-slow" />
           <div className="mb-8 w-[200px] h-[200px] flex items-center justify-center animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
              <img 
-              src="/principal.gif"
+              src={uniqueGifSrc}
               alt="principal" 
               width={200} 
               height={200}
