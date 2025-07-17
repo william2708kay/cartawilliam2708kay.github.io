@@ -71,27 +71,7 @@ export function LetterOpener({
 
   useEffect(() => {
     setUniqueGifSrc(`/principal.gif?_t=${new Date().getTime()}`);
-  }, []);
 
-  const handleFinalButtonClick = () => {
-    if (isFinalButtonEnabled) {
-      setStep('finalSurprise');
-    } else {
-      toast({
-        title: "Aún no es tiempo...",
-        description: "señorita desesperada. ❤️",
-        duration: 5000,
-      });
-    }
-  };
-
-  useEffect(() => {
-    const unlockDate = new Date('2025-07-19T00:00:00');
-    const now = new Date();
-    setIsFinalButtonEnabled(now >= unlockDate);
-  }, []);
-
-  useEffect(() => {
     const newPetals = Array.from({ length: 30 }).map((_, i) => {
       let icon;
       const rand = Math.random();
@@ -115,7 +95,24 @@ export function LetterOpener({
       };
     });
     setPetals(newPetals);
+
+    const unlockDate = new Date('2025-07-19T00:00:00');
+    const now = new Date();
+    setIsFinalButtonEnabled(now >= unlockDate);
+
   }, []);
+
+  const handleFinalButtonClick = () => {
+    if (isFinalButtonEnabled) {
+      setStep('finalSurprise');
+    } else {
+      toast({
+        title: "Aún no es tiempo...",
+        description: "señorita desesperada. ❤️",
+        duration: 5000,
+      });
+    }
+  };
 
   useEffect(() => {
     if (step === 'specialMessage') {
